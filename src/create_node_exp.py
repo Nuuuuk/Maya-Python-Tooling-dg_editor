@@ -15,7 +15,7 @@ class Exp(object):
     # name_match = re.compile('^[a-zA-Z_][a-zA-Z0-9_]*$')
     name_match = re.compile(r'[a-zA-Z0-9]+')
     colon_match = re.compile(r':')
-    space_match = re.compile(r'\s+')
+    space_match = re.compile(r' +')
 
     def __init__(self, exp):
         self.exp = exp

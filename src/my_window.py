@@ -8,6 +8,9 @@ from PySide2.QtWidgets import *
 from maya.OpenMayaUI import MQtUtil
 from shiboken2 import wrapInstance
 
+import widget_nodes as wn
+import widget_connections as wc
+
 if sys.version_info.major >= 3:
     long = int # shim
 
@@ -39,14 +42,14 @@ class MyWindow(QWidget):
 
         # create widget
         self.tab = tab = QTabWidget(self)
-        tab.addTab(QLabel(text="Modification to Nodes"), "Node")
-        tab.addTab(QLabel(text="Modification to Connections"), "Connection")
-        tab.addTab(QLabel(text="Settings"), "Settings")
+        tab.addTab(wn.new(), "Node")
+        tab.addTab(wc.new(), "Connection")
+        tab.addTab(QLabel(text="Settings", parent=None), "Settings")
 
         # add widget to layout
         layout.addWidget(tab)
 
-        # apply layout to window
+        # apply layout to widget
         self.setLayout(layout)
 
 def new():

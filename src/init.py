@@ -6,6 +6,7 @@ import importlib as imp
 
 # import modules needed
 import config
+import widget_nodes, widget_connections
 import my_window
 
 # reload config at first
@@ -13,6 +14,8 @@ imp.reload(config)
 
 if config.DEBUG:
     # reload everything
+    imp.reload(widget_nodes)
+    imp.reload(widget_connections)
     imp.reload(my_window)
 else:
     pass

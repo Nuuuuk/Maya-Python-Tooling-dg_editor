@@ -8,13 +8,18 @@ class TokenBase(object):
 
 class TokenColon(TokenBase):
     pass
+
 class TokenName(TokenBase):
+    pass
+
+class TokenLF(TokenBase):
     pass
 
 class Exp(object):
     # name_match = re.compile('^[a-zA-Z_][a-zA-Z0-9_]*$')
     name_match = re.compile(r'[a-zA-Z0-9]+')
     colon_match = re.compile(r':')
+    linefeed_match = re.compile(r'(\r\n|\n)+')  # \r\n first
     space_match = re.compile(r' +')
 
     def __init__(self, exp):
@@ -47,5 +52,15 @@ class Exp(object):
                 yield token
                 continue
 
+            # match line feed
+            m = self.linefeed_match.match(exp)
+            if m is not None:
+                token = TokenLF(exp[m.start(): m.end()])
+                exp = exp[m.end():]
+                yield token
+                continue
+
 if __name__ == "__main__":
-    print(list(Exp("abc: def")))
+    print(list(Exp("""abc: def
+
+                   abc: def""")))

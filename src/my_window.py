@@ -11,7 +11,7 @@ from shiboken2 import wrapInstance
 if sys.version_info.major >= 3:
     long = int # shim
 
-class MyWindow(QMainWindow):
+class MyWindow(QWidget):
     def __init__(self, parent=None):
         super(MyWindow, self).__init__(parent=parent)
 

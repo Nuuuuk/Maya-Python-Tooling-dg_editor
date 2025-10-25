@@ -1,6 +1,7 @@
 # for py2
 from __future__ import unicode_literals, print_function
 
+import config
 import sys
 from PySide2.QtCore import Qt
 from PySide2.QtWidgets import *
@@ -28,3 +29,5 @@ class MyWindow(QMainWindow):
 
         # set as floating window, otherwise it's onto maya main window
         self.setWindowFlags(Qt.Window)
+        # add title
+        self.setWindowTitle("dg editor {}".format(config.VERSION))

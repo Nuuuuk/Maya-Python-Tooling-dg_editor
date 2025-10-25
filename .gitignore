@@ -1,0 +1,12 @@
+# 1. ignore virtual env
+.venv/
+
+# 2. ignore IDE settings of PyCharm
+.idea/
+
+# 3. ignore cache files
+__pycache__/
+*.pyc
+
+# 4. ignore Maya thumbnails
+.mayaSwatches/

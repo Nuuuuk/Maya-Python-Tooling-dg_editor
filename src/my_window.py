@@ -29,8 +29,25 @@ class MyWindow(QWidget):
 
         # set as floating window, otherwise it's onto maya main window
         self.setWindowFlags(Qt.Window)
+
         # add title
         self.setWindowTitle("dg editor {}".format(config.VERSION))
+
+        # create an empty vertical layout
+        self.main_layout = layout = QVBoxLayout()
+        layout.setContentsMargins(1, 1, 1, 1)
+
+        # create widget
+        self.tab = tab = QTabWidget(self)
+        tab.addTab(QLabel(text="Modification to Nodes"), "Node")
+        tab.addTab(QLabel(text="Modification to Connections"), "Connection")
+        tab.addTab(QLabel(text="Settings"), "Settings")
+
+        # add widget to layout
+        layout.addWidget(tab)
+
+        # apply layout to window
+        self.setLayout(layout)
 
 def new():
     win = MyWindow()

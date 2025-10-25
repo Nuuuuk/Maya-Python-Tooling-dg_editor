@@ -31,3 +31,11 @@ class MyWindow(QMainWindow):
         self.setWindowFlags(Qt.Window)
         # add title
         self.setWindowTitle("dg editor {}".format(config.VERSION))
+
+def new():
+    win = MyWindow()
+    win.show()
+
+    # only when DEBUG, fire and forget, shouldn't depend on return
+    if config.DEBUG:
+        return win

@@ -30,6 +30,25 @@ class Exp(object):
 
     def __iter__(self):
         tokens = list(self.lex())
+        while True:
+            if len(tokens) == 0:
+                return
+
+            # remove and skip line feed
+            if isinstance(tokens[0], TokenLF):
+                tokens.pop(0)
+                continue
+
+            # correct grammar
+            if isinstance(tokens[0], TokenName) and \
+                    isinstance(tokens[1], TokenColon) and \
+                    isinstance(tokens[2], TokenName):
+                yield tokens[0].text, tokens[2].text
+                # remove a group of correct grammar
+                tokens = tokens[3:]
+                continue
+
+            raise ExpExc('syntax error')
 
     def lex(self):
         exp = self.exp
@@ -71,3 +90,8 @@ if __name__ == "__main__":
     print(list(Exp("""abc: def
 
                    abc: def""").lex()))
+
+    print('=========')
+    print(list(Exp("""abc: def
+
+                   abc: def""")))

@@ -87,11 +87,9 @@ class Exp(object):
             raise ExpExc('lex error')
 
 if __name__ == "__main__":
-    print(list(Exp("""abc: def
-
-                   abc: def""").lex()))
-
+    test_exp = ("""\t
+    abc: def
+    ghi: jkl""")
+    print(list(Exp(test_exp).lex()))
     print('=========')
-    print(list(Exp("""abc: def
-
-                   abc: def""")))
+    print(list(Exp(test_exp)))

@@ -26,6 +26,9 @@ class Exp(object):
         self.exp = exp
 
     def __iter__(self):
+        tokens = list(self.lex())
+
+    def lex(self):
         exp = self.exp
         while True:
             if len(exp) == 0:
@@ -63,4 +66,4 @@ class Exp(object):
 if __name__ == "__main__":
     print(list(Exp("""abc: def
 
-                   abc: def""")))
+                   abc: def""").lex()))

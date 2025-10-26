@@ -7,9 +7,18 @@ from PySide2.QtGui import *
 from PySide2.QtCore import Qt
 from PySide2.QtWidgets import *
 
+import maya.cmds as cmds
+
+import create_node_exp
+
 class BaseWidget(QWidget):
     def __init__(self, parent=None):
         super(BaseWidget, self).__init__(parent)
+
+    def create_node(self):
+        exp_text = self.name_text.toPlainText()
+        for name, type in create_node_exp.Exp(exp_text):
+            cmds.createNode(type, name=name)
 
     # override virtual func, this will auto execute when needed
     def paintEvent(self, event):
@@ -37,6 +46,7 @@ class WidgetA(BaseWidget):
 
         # main_layout
         self.create_btn = QPushButton("Create")
+        self.create_btn.clicked.connect(self.create_node)
 
         self.main_layout = main_layout = QVBoxLayout()
         main_layout.addWidget(QLabel(text="Create: ", parent=None))

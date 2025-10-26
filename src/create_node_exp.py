@@ -23,7 +23,7 @@ class Exp(object):
     name_match = re.compile(r'[a-zA-Z0-9]+')
     colon_match = re.compile(r':')
     linefeed_match = re.compile(r'(\r\n|\n)+')  # \r\n first
-    space_match = re.compile(r' +')
+    space_match = re.compile(r'[ \t]+')
 
     def __init__(self, exp):
         self.exp = exp

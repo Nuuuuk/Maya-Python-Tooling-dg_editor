@@ -15,6 +15,9 @@ class TokenName(TokenBase):
 class TokenLF(TokenBase):
     pass
 
+class ExpExc(Exception):
+    pass
+
 class Exp(object):
     # name_match = re.compile('^[a-zA-Z_][a-zA-Z0-9_]*$')
     name_match = re.compile(r'[a-zA-Z0-9]+')
@@ -62,6 +65,7 @@ class Exp(object):
                 exp = exp[m.end():]
                 yield token
                 continue
+            raise ExpExc('lex error')
 
 if __name__ == "__main__":
     print(list(Exp("""abc: def

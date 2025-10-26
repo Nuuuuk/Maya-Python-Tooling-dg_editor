@@ -29,7 +29,7 @@ class Exp(object):
         self.exp = exp
 
     def __iter__(self):
-        tokens = list(self.lex())
+        tokens = list(self._lex())
         while True:
             if len(tokens) == 0:
                 return
@@ -50,7 +50,7 @@ class Exp(object):
 
             raise ExpExc('syntax error')
 
-    def lex(self):
+    def _lex(self):
         exp = self.exp
         while True:
             if len(exp) == 0:
@@ -87,9 +87,10 @@ class Exp(object):
             raise ExpExc('lex error')
 
 if __name__ == "__main__":
-    test_exp = ("""\t
+    test_exp = ("""\t\r\n
     abc: def
     ghi: jkl""")
-    print(list(Exp(test_exp).lex()))
-    print('=========')
+    print('test lex')
+    print(list(Exp(test_exp)._lex()))
+    print('test syntax')
     print(list(Exp(test_exp)))

@@ -32,6 +32,7 @@ class Exp(object):
     def __init__(self, exp):
         self.exp = exp
 
+    # process the lex text by grammar
     def __iter__(self):
         tokens = list(self._lex())
         while True:
@@ -54,6 +55,7 @@ class Exp(object):
 
             raise ExpExc('syntax error')
 
+    # read the text
     def _lex(self):
         exp = self.exp
         while True:

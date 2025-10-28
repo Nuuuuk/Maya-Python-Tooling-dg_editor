@@ -32,9 +32,10 @@ class BaseWidget(QWidget):
         p.drawRect(self.rect())
         p.end()
 
-class WidgetA(BaseWidget):
+# upper layout to create nodes
+class WidgetCreate(BaseWidget):
     def __init__(self, parent=None):
-        super(WidgetA, self).__init__(parent)
+        super(WidgetCreate, self).__init__(parent)
 
         # body_layout
         self.name_text = QTextEdit()
@@ -60,9 +61,10 @@ class WidgetA(BaseWidget):
         # apply layout to self
         self.setLayout(main_layout)
 
-class WidgetB(BaseWidget):
+# lower layout to delete nodes
+class WidgetDelete(BaseWidget):
     def __init__(self, parent=None):
-        super(WidgetB, self).__init__(parent)
+        super(WidgetDelete, self).__init__(parent)
 
         # body_layout
         self.name_text = QTextEdit()
@@ -95,8 +97,8 @@ class WidgetNodes(QWidget):
         self.widget_layout = layout = QVBoxLayout()
         # layout.setContentsMargins(0, 0, 0, 0)
 
-        self.widget_a = widget_a = WidgetA(self)
-        self.widget_b = widget_b = WidgetB(self)
+        self.widget_a = widget_a = WidgetCreate(self)
+        self.widget_b = widget_b = WidgetDelete(self)
 
         layout.addWidget(widget_a)
         layout.addWidget(widget_b)

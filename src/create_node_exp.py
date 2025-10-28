@@ -1,3 +1,7 @@
+"""
+create nodes from input text
+"""
+
 # for py2
 from __future__ import unicode_literals, print_function
 import re

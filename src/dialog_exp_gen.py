@@ -9,7 +9,6 @@ class ExpGenDialog(QDialog):
     def __init__(self, parent=None):
         super(ExpGenDialog, self).__init__(parent)
 
-def new(parent=None):
-    dialog = ExpGenDialog(parent)
-    dialog.exec_()
-    return dialog
+def exec_(parent=None):
+    dia = ExpGenDialog(parent)
+    dia.exec_()

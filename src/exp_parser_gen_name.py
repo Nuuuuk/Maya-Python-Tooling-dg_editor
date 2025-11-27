@@ -8,7 +8,9 @@ import re
 
 class TokenBase(object):
     def __init__(self, text):
-        self.text = textif __name__ == "__main__":
+        self.text = text
+    def __repr__(self):
+        return "{}<{}>".format(self.__class__.__name__, self.text)
 class TokenName(TokenBase):
     pass
 class TokenValue(TokenBase):
@@ -70,7 +72,14 @@ def parse(exp, values):
                     raise GenNameExpExc("Key not found")
                 name += str(v)
         yield name
+
 if __name__ == "__main__":
     test_exp = ("box_{name_id}_joint")
     print('test lex')
     print(list(_lex(test_exp)))
+    print('test parse')
+    print(list(parse(test_exp,[
+        {"name_id": 0},
+        {"name_id": 2},
+        {"name_id": 3},
+    ])))

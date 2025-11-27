@@ -14,6 +14,7 @@ from PySide2.QtWidgets import *
 import maya.cmds as cmds
 
 import exp_parser_node_create
+import dialog_exp_gen
 
 class BaseWidget(QWidget):
     def __init__(self, parent=None):
@@ -42,6 +43,8 @@ class WidgetCreate(BaseWidget):
         self.create_exp_btn = QPushButton("Create by Exp")
         self.create_exp_btn.setFixedWidth(170)
 
+        self.create_exp_btn.clicked.connect(self.create_exp)
+
         self.create_exp_btn_layout = QVBoxLayout()
         self.create_exp_btn_layout.addWidget(self.create_exp_btn)
         self.create_exp_btn_layout.addStretch()
@@ -60,6 +63,10 @@ class WidgetCreate(BaseWidget):
 
         # apply layout to self
         self.setLayout(main_layout)
+
+    def create_exp(self):
+        names = dialog_exp_gen.exec_()
+        self.name_text.setText("\n".join(("{}: {}".format(n,t) for n,t in names)))
 
 # lower layout to delete nodes
 class WidgetDelete(BaseWidget):

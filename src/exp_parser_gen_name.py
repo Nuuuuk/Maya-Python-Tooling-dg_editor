@@ -52,6 +52,25 @@ def _lex(exp):
 
         raise GenNameExpExc('lex error')
 
+def parse(exp, values):
+    """
+    :param exp: abc_{value_name} or abc_{value_name} or abc_{value_name}_def
+    :param values: [{k:v, ...}, ... ]
+    :return:
+    """
+    tokens = list(_lex(exp))
+    for kv in values:
+        name = ''
+        for t in tokens:
+            if isinstance(t, TokenName):
+                name += t.text
+            else:
+                v = kv.get(t.text)
+                if v is None:
+                    raise GenNameExpExc("Key not found")
+                name += str(v)
+        yield name
+if __name__ == "__main__":
     test_exp = ("box_{name_id}_joint")
     print('test lex')
     print(list(_lex(test_exp)))

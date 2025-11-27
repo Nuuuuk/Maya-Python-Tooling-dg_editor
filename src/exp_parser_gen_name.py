@@ -9,6 +9,15 @@ import re
 class TokenBase(object):
     def __init__(self, text):
         self.text = textif __name__ == "__main__":
+class TokenName(TokenBase):
+    pass
+class TokenValue(TokenBase):
+    pass
+class GenNameExpExc(Exception):
+    pass
+name_match = re.compile(r'[a-zA-Z0-9_]+')
+value_match = re.compile(r'\{([a-zA-Z0-9_]+)\}')
+space_match = re.compile(r'[ \t]+')
 
 def _lex(exp):
     """

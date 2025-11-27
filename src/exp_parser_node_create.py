@@ -19,7 +19,7 @@ class TokenName(TokenBase):
 class TokenLF(TokenBase):
     pass
 
-class ExpExc(Exception):
+class NodeCreateExpExc(Exception):
     pass
 
 class Exp(object):
@@ -53,7 +53,7 @@ class Exp(object):
                 tokens = tokens[3:]
                 continue
 
-            raise ExpExc('syntax error')
+            raise NodeCreateExpExc('syntax error')
 
     # read the text
     def _lex(self):
@@ -90,7 +90,7 @@ class Exp(object):
                 exp = exp[m.end():]
                 yield token
                 continue
-            raise ExpExc('lex error')
+            raise NodeCreateExpExc('lex error')
 
 if __name__ == "__main__":
     test_exp = ("""\t\r\n

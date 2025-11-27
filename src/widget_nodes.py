@@ -1,3 +1,7 @@
+"""
+Node Tab
+"""
+
 # for py2
 from __future__ import unicode_literals, print_function
 
@@ -9,7 +13,8 @@ from PySide2.QtWidgets import *
 
 import maya.cmds as cmds
 
-import create_node_exp
+import exp_parser_node_create
+import dialog_exp_gen
 
 class BaseWidget(QWidget):
     def __init__(self, parent=None):
@@ -17,7 +22,7 @@ class BaseWidget(QWidget):
 
     def create_node(self):
         exp_text = self.name_text.toPlainText()
-        for name, type in create_node_exp.Exp(exp_text):
+        for name, type in exp_parser_node_create.Exp(exp_text):
             cmds.createNode(type, name=name)
 
     # override virtual func, this will auto execute when needed
@@ -28,14 +33,17 @@ class BaseWidget(QWidget):
         p.drawRect(self.rect())
         p.end()
 
-class WidgetA(BaseWidget):
+# upper layout to create nodes
+class WidgetCreate(BaseWidget):
     def __init__(self, parent=None):
-        super(WidgetA, self).__init__(parent)
+        super(WidgetCreate, self).__init__(parent)
 
         # body_layout
         self.name_text = QTextEdit()
         self.create_exp_btn = QPushButton("Create by Exp")
         self.create_exp_btn.setFixedWidth(170)
+
+        self.create_exp_btn.clicked.connect(self.create_exp)
 
         self.create_exp_btn_layout = QVBoxLayout()
         self.create_exp_btn_layout.addWidget(self.create_exp_btn)
@@ -56,9 +64,14 @@ class WidgetA(BaseWidget):
         # apply layout to self
         self.setLayout(main_layout)
 
-class WidgetB(BaseWidget):
+    def create_exp(self):
+        names = dialog_exp_gen.exec_()
+        self.name_text.setText("\n".join(("{}: {}".format(n,t) for n,t in names)))
+
+# lower layout to delete nodes
+class WidgetDelete(BaseWidget):
     def __init__(self, parent=None):
-        super(WidgetB, self).__init__(parent)
+        super(WidgetDelete, self).__init__(parent)
 
         # body_layout
         self.name_text = QTextEdit()
@@ -91,8 +104,8 @@ class WidgetNodes(QWidget):
         self.widget_layout = layout = QVBoxLayout()
         # layout.setContentsMargins(0, 0, 0, 0)
 
-        self.widget_a = widget_a = WidgetA(self)
-        self.widget_b = widget_b = WidgetB(self)
+        self.widget_a = widget_a = WidgetCreate(self)
+        self.widget_b = widget_b = WidgetDelete(self)
 
         layout.addWidget(widget_a)
         layout.addWidget(widget_b)

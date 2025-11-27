@@ -1,3 +1,7 @@
+"""
+create nodes from input text
+"""
+
 # for py2
 from __future__ import unicode_literals, print_function
 import re
@@ -5,6 +9,8 @@ import re
 class TokenBase(object):
     def __init__(self, text):
         self.text = text
+    def __repr__(self):
+        return "{}<{}>".format(self.__class__.__name__, self.text)
 
 class TokenColon(TokenBase):
     pass
@@ -15,12 +21,12 @@ class TokenName(TokenBase):
 class TokenLF(TokenBase):
     pass
 
-class ExpExc(Exception):
+class NodeCreateExpExc(Exception):
     pass
 
 class Exp(object):
     # name_match = re.compile('^[a-zA-Z_][a-zA-Z0-9_]*$')
-    name_match = re.compile(r'[a-zA-Z0-9]+')
+    name_match = re.compile(r'[a-zA-Z0-9_]+')
     colon_match = re.compile(r':')
     linefeed_match = re.compile(r'(\r\n|\n)+')  # \r\n first
     space_match = re.compile(r'[ \t]+')
@@ -28,6 +34,7 @@ class Exp(object):
     def __init__(self, exp):
         self.exp = exp
 
+    # process the lex text by grammar
     def __iter__(self):
         tokens = list(self._lex())
         while True:
@@ -43,13 +50,14 @@ class Exp(object):
             if isinstance(tokens[0], TokenName) and \
                     isinstance(tokens[1], TokenColon) and \
                     isinstance(tokens[2], TokenName):
-                yield tokens[0].text, tokens[2].text
+                yield tokens[0].text, tokens[2].text # yield current pair
                 # remove a group of correct grammar
                 tokens = tokens[3:]
                 continue
 
-            raise ExpExc('syntax error')
+            raise NodeCreateExpExc('syntax error')
 
+    # read the text
     def _lex(self):
         exp = self.exp
         while True:
@@ -84,7 +92,7 @@ class Exp(object):
                 exp = exp[m.end():]
                 yield token
                 continue
-            raise ExpExc('lex error')
+            raise NodeCreateExpExc('lex error')
 
 if __name__ == "__main__":
     test_exp = ("""\t\r\n

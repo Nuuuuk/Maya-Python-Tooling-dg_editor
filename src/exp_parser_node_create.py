@@ -48,7 +48,7 @@ class Exp(object):
             if isinstance(tokens[0], TokenName) and \
                     isinstance(tokens[1], TokenColon) and \
                     isinstance(tokens[2], TokenName):
-                yield tokens[0].text, tokens[2].text
+                yield tokens[0].text, tokens[2].text # yield current pair
                 # remove a group of correct grammar
                 tokens = tokens[3:]
                 continue

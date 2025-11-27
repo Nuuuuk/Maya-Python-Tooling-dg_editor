@@ -13,7 +13,7 @@ from PySide2.QtWidgets import *
 
 import maya.cmds as cmds
 
-import create_node_exp
+import exp_parser_node_create
 
 class BaseWidget(QWidget):
     def __init__(self, parent=None):
@@ -21,7 +21,7 @@ class BaseWidget(QWidget):
 
     def create_node(self):
         exp_text = self.name_text.toPlainText()
-        for name, type in create_node_exp.Exp(exp_text):
+        for name, type in exp_parser_node_create.Exp(exp_text):
             cmds.createNode(type, name=name)
 
     # override virtual func, this will auto execute when needed

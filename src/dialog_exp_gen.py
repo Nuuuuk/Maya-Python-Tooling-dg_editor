@@ -7,9 +7,11 @@ from __future__ import unicode_literals, print_function
 
 from PySide2.QtCore import Qt
 from PySide2.QtWidgets import *
+import exp_parser_gen_name
 
 class ExpGenDialog(QDialog):
     def __init__(self, parent=None):
+        self.name_types = []
         super(ExpGenDialog, self).__init__(parent)
         self.setWindowTitle("Generate Expression")
         self.main_layout = QHBoxLayout(self)
@@ -30,7 +32,18 @@ class ExpGenDialog(QDialog):
         self.main_layout.addWidget(self.node_num)
         self.main_layout.addWidget(self.gen_bn)
 
+    def gen(self):
+        num = self.node_num.value()
+        exp = self.name_line_edit.text()
+        type_ = self.type_line_edit.text()
+        values = [{"name_id": i} for i in range(num)]
+
+        self.name_types = [(n, type_) for n in exp_parser_gen_name.parse(exp, values)]
+
+        # close dialog after generation
+        self.close()
 
 def exec_(parent=None):
     dia = ExpGenDialog(parent)
     dia.exec_()
+    return dia.name_types

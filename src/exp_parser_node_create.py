@@ -9,6 +9,8 @@ import re
 class TokenBase(object):
     def __init__(self, text):
         self.text = text
+    def __repr__(self):
+        return "{}<{}>".format(self.__class__.__name__, self.text)
 
 class TokenColon(TokenBase):
     pass
@@ -24,7 +26,7 @@ class NodeCreateExpExc(Exception):
 
 class Exp(object):
     # name_match = re.compile('^[a-zA-Z_][a-zA-Z0-9_]*$')
-    name_match = re.compile(r'[a-zA-Z0-9]+')
+    name_match = re.compile(r'[a-zA-Z0-9_]+')
     colon_match = re.compile(r':')
     linefeed_match = re.compile(r'(\r\n|\n)+')  # \r\n first
     space_match = re.compile(r'[ \t]+')

@@ -36,7 +36,7 @@ class ExpGenDialog(QDialog):
         num = self.node_num.value()
         exp = self.name_line_edit.text()
         type_ = self.type_line_edit.text()
-        values = [{"name_id": i} for i in range(num)]
+        values = [{"id": i} for i in range(num)]
 
         self.name_types = [(n, type_) for n in exp_parser_gen_name.parse(exp, values)]
 

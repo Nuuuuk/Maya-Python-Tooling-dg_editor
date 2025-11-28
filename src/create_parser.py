@@ -1,5 +1,6 @@
 """
-create nodes from input text
+create nodes from input expressions
+'joint_0: joint'
 """
 
 # for py2

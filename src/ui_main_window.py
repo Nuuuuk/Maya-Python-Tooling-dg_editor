@@ -14,9 +14,9 @@ import ui_tab_connections as utc
 if sys.version_info.major >= 3:
     long = int # shim
 
-class MyWindow(QWidget):
+class DGEditorWindow(QWidget):
     def __init__(self, parent=None):
-        super(MyWindow, self).__init__(parent=parent)
+        super(DGEditorWindow, self).__init__(parent=parent)
 
         if not parent:
             # Maya main window's pointer
@@ -53,7 +53,7 @@ class MyWindow(QWidget):
         self.setLayout(layout)
 
 def new():
-    win = MyWindow()
+    win = DGEditorWindow()
     win.show()
 
     # only when DEBUG, fire and forget, shouldn't depend on return

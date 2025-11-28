@@ -5,6 +5,7 @@ import config
 import sys
 from PySide2.QtCore import Qt
 from PySide2.QtWidgets import *
+import conn_dialog
 
 class WidgetFuncSelect(QWidget):
     Connect, Disconnect = range(2)
@@ -37,6 +38,8 @@ class MatchWidget(QWidget):
         self.match_exp_btn = QPushButton("Match by Regex")
         self.match_exp_btn.setFixedWidth(170)
 
+        self.match_exp_btn.clicked.connect(self.match)
+
         self.match_exp_btn_layout = QVBoxLayout()
         self.match_exp_btn_layout.addWidget(self.match_exp_btn)
         self.match_exp_btn_layout.addStretch()
@@ -46,8 +49,13 @@ class MatchWidget(QWidget):
 
         self.setLayout(body_layout)
 
+    def match(self):
+        names = conn_dialog.exec_()
+        self.text_box.setPlainText("\n".join(names))
+
     def get_names(self):
         return self.text_box.toPlainText().splitlines()
+
 
 class WidgetConnections(QWidget):
     def __init__(self, parent=None):

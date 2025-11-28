@@ -18,15 +18,21 @@ import my_window
 # reload config at first
 imp.reload(config)
 
+modules = [
+    exp_parser_node_create,
+
+    dialog_exp_gen,
+    dialog_del_match,
+
+    widget_nodes,
+    widget_connections,
+    my_window,
+]
+
 if config.DEBUG:
     # reload everything
-    imp.reload(exp_parser_node_create)
-    imp.reload(dialog_exp_gen)
-    imp.reload(dialog_del_match)
-
-    imp.reload(widget_nodes)
-    imp.reload(widget_connections)
-    imp.reload(my_window)
+    for m in modules:
+        imp.reload(m)
 
 else:
     pass

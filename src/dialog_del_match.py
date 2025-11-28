@@ -1,5 +1,5 @@
 """
-a dialog in Node Tab to generate expression
+a dialog from Delete Widget in Node Tab to match by regex
 """
 
 # for py2
@@ -8,10 +8,10 @@ from __future__ import unicode_literals, print_function
 from PySide2.QtCore import Qt
 from PySide2.QtWidgets import *
 
-class ExpGenDialog(QDialog):
+class DelMatchDialog(QDialog):
     def __init__(self, parent=None):
         self.name_types = []
-        super(ExpGenDialog, self).__init__(parent)
+        super(DelMatchDialog, self).__init__(parent)
         self.setWindowTitle("Regular Expression Match")
         self.main_layout = QHBoxLayout(self)
 
@@ -31,6 +31,6 @@ class ExpGenDialog(QDialog):
         self.close()
 
 def exec_(parent=None):
-    dia = ExpGenDialog(parent)
+    dia = DelMatchDialog(parent)
     dia.exec_()
     return dia.name_types

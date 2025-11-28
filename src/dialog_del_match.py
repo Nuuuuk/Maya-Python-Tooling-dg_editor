@@ -8,6 +8,8 @@ from __future__ import unicode_literals, print_function
 from PySide2.QtCore import Qt
 from PySide2.QtWidgets import *
 
+import del_match
+
 class DelMatchDialog(QDialog):
     def __init__(self, parent=None):
         self.name_types = []
@@ -25,7 +27,7 @@ class DelMatchDialog(QDialog):
         self.main_layout.addWidget(self.match_bn)
 
     def gen(self):
-        self.names = []
+        self.names = list(del_match.regex_match(self.name_line_edit.text()))
 
         # close dialog after generation
         self.close()
@@ -33,4 +35,4 @@ class DelMatchDialog(QDialog):
 def exec_(parent=None):
     dia = DelMatchDialog(parent)
     dia.exec_()
-    return dia.name_types
+    return dia.names

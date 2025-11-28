@@ -7,9 +7,9 @@ import importlib as imp
 # import modules needed
 import config
 
-import create_parser
+import create_parser, delete_dialog_parser, conn_dialog_parser
 
-import create_dialog, delete_dialog
+import create_dialog, delete_dialog, conn_dialog
 
 import ui_tab_nodes, ui_tab_connections
 
@@ -21,9 +21,12 @@ imp.reload(config)
 
 modules = [
     create_parser,
+    delete_dialog_parser,
+    conn_dialog_parser,
 
     create_dialog,
     delete_dialog,
+    conn_dialog,
 
     ui_tab_nodes,
     ui_tab_connections,

@@ -1,5 +1,5 @@
 """
-a dialog in Node Tab to generate expression
+a dialog from Create Widget in Node Tab to generate expression
 """
 
 # for py2

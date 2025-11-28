@@ -15,15 +15,11 @@ import maya.cmds as cmds
 
 import exp_parser_node_create
 import dialog_exp_gen
+import dialog_del_match
 
 class BaseWidget(QWidget):
     def __init__(self, parent=None):
         super(BaseWidget, self).__init__(parent)
-
-    def create_node(self):
-        exp_text = self.name_text.toPlainText()
-        for name, type in exp_parser_node_create.Exp(exp_text):
-            cmds.createNode(type, name=name)
 
     # override virtual func, this will auto execute when needed
     def paintEvent(self, event):
@@ -43,7 +39,7 @@ class WidgetCreate(BaseWidget):
         self.create_exp_btn = QPushButton("Create by Exp")
         self.create_exp_btn.setFixedWidth(170)
 
-        self.create_exp_btn.clicked.connect(self.create_exp)
+        self.create_exp_btn.clicked.connect(self.create_dialog)
 
         self.create_exp_btn_layout = QVBoxLayout()
         self.create_exp_btn_layout.addWidget(self.create_exp_btn)
@@ -64,9 +60,14 @@ class WidgetCreate(BaseWidget):
         # apply layout to self
         self.setLayout(main_layout)
 
-    def create_exp(self):
+    def create_node(self):
+        exp_text = self.name_text.toPlainText()
+        for name, type in exp_parser_node_create.Exp(exp_text):
+            cmds.createNode(type, name=name)
+
+    def create_dialog(self):
         names = dialog_exp_gen.exec_()
-        self.name_text.setText("\n".join(("{}: {}".format(n,t) for n,t in names)))
+        self.name_text.setPlainText("\n".join(("{}: {}".format(n,t) for n,t in names)))
 
 # lower layout to delete nodes
 class WidgetDelete(BaseWidget):
@@ -75,8 +76,10 @@ class WidgetDelete(BaseWidget):
 
         # body_layout
         self.name_text = QTextEdit()
-        self.match_exp_btn = QPushButton("Match by Regular Exp")
+        self.match_exp_btn = QPushButton("Match by Regex")
         self.match_exp_btn.setFixedWidth(170)
+
+        self.match_exp_btn.clicked.connect(self.delete_dialog)
 
         self.match_exp_btn_layout = QVBoxLayout()
         self.match_exp_btn_layout.addWidget(self.match_exp_btn)
@@ -87,6 +90,7 @@ class WidgetDelete(BaseWidget):
 
         # main_layout
         self.delete_btn = QPushButton("Delete")
+        self.delete_btn.clicked.connect(self.delete_node)
 
         self.main_layout = main_layout = QVBoxLayout()
         main_layout.addWidget(QLabel(text="Delete: ", parent=None))
@@ -95,6 +99,16 @@ class WidgetDelete(BaseWidget):
 
         # apply layout to self
         self.setLayout(main_layout)
+
+    def delete_node(self):
+        node_names = self.name_text.toPlainText().splitlines()
+        if len(node_names) < 1: return
+        cmds.delete(node_names)
+
+    def delete_dialog(self):
+        names = dialog_del_match.exec_()
+        self.name_text.setPlainText("\n".join(names))
+
 
 class WidgetNodes(QWidget):
     def __init__(self, parent=None):

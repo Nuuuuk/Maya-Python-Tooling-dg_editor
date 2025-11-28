@@ -1,5 +1,7 @@
 """
-generate names eg ['box_0_joint', 'box_2_joint', 'box_3_joint']
+Generate names variations based on tokens
+from: 'box_{id}', 'joint'
+to: ['box_0_joint', 'box_2_joint', 'box_3_joint']
 """
 
 # for py2
@@ -15,9 +17,9 @@ class TokenName(TokenBase):
     pass
 class TokenValue(TokenBase):
     pass
-class GenNameExpExc(Exception):
+class CreateDialogParserExc(Exception):
     pass
-
+# Compiled Regex patterns
 name_match = re.compile(r'[a-zA-Z0-9_]+')
 value_match = re.compile(r'\{([a-zA-Z0-9_]+)\}')
 space_match = re.compile(r'[ \t]+')
@@ -47,20 +49,20 @@ def _lex(exp):
         # match value
         m = value_match.match(exp)
         if m is not None:
-            token = TokenValue(m.group(1))
+            token = TokenValue(m.group(1))# Extract content inside {}
             exp = exp[m.end():]
             yield token
             continue
 
-        raise GenNameExpExc('lex error')
+        raise CreateDialogParserExc('Lex error: Unexpected character')
 
 def parse(exp, values):
     """
     :param exp: abc_{value_name} or abc_{value_name} or abc_{value_name}_def
-    :param values: [{k:v, ...}, ... ]
-    :return:
+    :param values: List of dicts e.g. [{"id": 0}, {"id": 1}]
     """
     tokens = list(_lex(exp))
+
     for kv in values:
         name = ''
         for t in tokens:
@@ -69,7 +71,7 @@ def parse(exp, values):
             else:
                 v = kv.get(t.text)
                 if v is None:
-                    raise GenNameExpExc("Key not found")
+                    raise CreateDialogParserExc("Key not found")
                 name += str(v)
         yield name
 

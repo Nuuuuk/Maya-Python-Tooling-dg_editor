@@ -13,9 +13,9 @@ from PySide2.QtWidgets import *
 
 import maya.cmds as cmds
 
-import exp_parser_node_create
-import dialog_exp_gen
-import dialog_del_match
+import create_parser
+import create_dialog
+import delete_dialog
 
 class BaseWidget(QWidget):
     def __init__(self, parent=None):
@@ -62,11 +62,11 @@ class WidgetCreate(BaseWidget):
 
     def create_node(self):
         exp_text = self.name_text.toPlainText()
-        for name, type in exp_parser_node_create.Exp(exp_text):
+        for name, type in create_parser.Exp(exp_text):
             cmds.createNode(type, name=name)
 
     def create_dialog(self):
-        names = dialog_exp_gen.exec_()
+        names = create_dialog.exec_()
         self.name_text.setPlainText("\n".join(("{}: {}".format(n,t) for n,t in names)))
 
 # lower layout to delete nodes
@@ -106,7 +106,7 @@ class WidgetDelete(BaseWidget):
         cmds.delete(node_names)
 
     def delete_dialog(self):
-        names = dialog_del_match.exec_()
+        names = delete_dialog.exec_()
         self.name_text.setPlainText("\n".join(names))
 
 

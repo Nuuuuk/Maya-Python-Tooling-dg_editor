@@ -7,26 +7,28 @@ import importlib as imp
 # import modules needed
 import config
 
-import exp_parser_node_create
-import dialog_exp_gen
-import dialog_del_match
+import create_parser
 
-import widget_nodes, widget_connections
-import my_window
+import create_dialog, delete_dialog
+
+import ui_tab_nodes, ui_tab_connections
+
+import ui_main_window
 
 
 # reload config at first
 imp.reload(config)
 
 modules = [
-    exp_parser_node_create,
+    create_parser,
 
-    dialog_exp_gen,
-    dialog_del_match,
+    create_dialog,
+    delete_dialog,
 
-    widget_nodes,
-    widget_connections,
-    my_window,
+    ui_tab_nodes,
+    ui_tab_connections,
+
+    ui_main_window,
 ]
 
 if config.DEBUG:

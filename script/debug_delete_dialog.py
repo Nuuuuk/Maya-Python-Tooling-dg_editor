@@ -1,8 +1,8 @@
 import importlib as imp
 import init
-import dialog_del_match
+import delete_dialog
 
 # reload
 imp.reload(init)
 
-win = dialog_del_match.exec_()
+win = delete_dialog.exec_()

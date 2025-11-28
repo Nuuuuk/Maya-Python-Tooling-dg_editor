@@ -1,8 +1,8 @@
 import importlib as imp
 import init
-import dialog_exp_gen
+import create_dialog
 
 # reload
 imp.reload(init)
 
-win = dialog_exp_gen.exec_()
+win = create_dialog.exec_()

@@ -1,5 +1,5 @@
 """
-generate names eg ['box_0_joint', 'box_2_joint', 'box_3_joint']
+generate names eg ['box_0_joint', 'box_2_joint', 'box_3_joint'] 
 """
 
 # for py2

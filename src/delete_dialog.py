@@ -5,10 +5,9 @@ a dialog from Delete Widget in Node Tab to match by regex
 # for py2
 from __future__ import unicode_literals, print_function
 
-from PySide2.QtCore import Qt
 from PySide2.QtWidgets import *
 
-import del_match
+import delete_dialog_parser
 
 class DelMatchDialog(QDialog):
     def __init__(self, parent=None):
@@ -27,7 +26,7 @@ class DelMatchDialog(QDialog):
         self.main_layout.addWidget(self.match_bn)
 
     def gen(self):
-        self.names = list(del_match.regex_match(self.name_line_edit.text()))
+        self.names = list(delete_dialog_parser.regex_match(self.name_line_edit.text()))
 
         # close dialog after generation
         self.close()

@@ -1,8 +1,8 @@
 import importlib as imp
 import init
-import my_window
+import ui_main_window
 
 # reload
 imp.reload(init)
 
-win = my_window.new()
+win = ui_main_window.new()

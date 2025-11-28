@@ -26,7 +26,7 @@ class DelMatchDialog(QDialog):
         self.main_layout.addWidget(self.match_bn)
 
     def gen(self):
-        self.names = list(delete_dialog_parser.regex_match(self.name_line_edit.text()))
+        self.names = list(delete_dialog_parser.get_matched_nodes(self.name_line_edit.text()))
 
         # close dialog after generation
         self.close()

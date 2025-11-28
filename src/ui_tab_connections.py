@@ -5,6 +5,7 @@ import config
 import sys
 from PySide2.QtCore import Qt
 from PySide2.QtWidgets import *
+import maya.cmds as cmds
 import conn_dialog
 
 class WidgetFuncSelect(QWidget):
@@ -53,7 +54,7 @@ class MatchWidget(QWidget):
         names = conn_dialog.exec_()
         self.text_box.setPlainText("\n".join(names))
 
-    def get_names(self):
+    def get_attrs(self):
         return self.text_box.toPlainText().splitlines()
 
 
@@ -69,15 +70,29 @@ class WidgetConnections(QWidget):
         self.widget_match_in_attrs = MatchWidget(self)
         self.exec_btn = QPushButton("Execute")
 
+        self.exec_btn.clicked.connect(self.execute)
+
         layout.addWidget(widget_func_select)
-        layout.addWidget(QLabel('Out Attributes:'))
+        layout.addWidget(QLabel('From Attributes:'))
         layout.addWidget(self.widget_match_out_attrs)
-        layout.addWidget(QLabel('In Attributes:'))
+        layout.addWidget(QLabel('To Attributes:'))
         layout.addWidget(self.widget_match_in_attrs)
         layout.addWidget(self.exec_btn)
 
         #apply layout to widget
         self.setLayout(layout)
+
+    def execute(self):
+        out_attrs = self.widget_match_out_attrs.get_attrs()
+        in_attrs = self.widget_match_in_attrs.get_attrs()
+        if len(out_attrs) != len(in_attrs):
+            raise ValueError("out_attrs and in_attrs must have same length")
+        for o, i in zip(out_attrs, in_attrs):
+            if self.widget_func_select.func() == WidgetFuncSelect.Connect:
+                cmds.connectAttr(o, i)
+            else:
+                cmds.disconnectAttr(o, i)
+
 
 def new():
     return WidgetConnections()

@@ -57,13 +57,16 @@ class WidgetConnections(QWidget):
         self.main_layout = layout = QVBoxLayout()
         # layout.setContentsMargins(0, 0, 0, 0)
         self.widget_func_select = widget_func_select = WidgetFuncSelect(self)
-        layout.addWidget(widget_func_select)
         self.widget_match_out_attrs = MatchWidget(self)
         self.widget_match_in_attrs = MatchWidget(self)
+        self.exec_btn = QPushButton("Execute")
+
+        layout.addWidget(widget_func_select)
         layout.addWidget(QLabel('Out Attributes:'))
         layout.addWidget(self.widget_match_out_attrs)
         layout.addWidget(QLabel('In Attributes:'))
         layout.addWidget(self.widget_match_in_attrs)
+        layout.addWidget(self.exec_btn)
 
         #apply layout to widget
         self.setLayout(layout)

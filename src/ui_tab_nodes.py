@@ -21,7 +21,7 @@ class BaseWidget(QWidget):
     def __init__(self, parent=None):
         super(BaseWidget, self).__init__(parent)
 
-    # override virtual func, this will auto execute when needed
+    # a faint background to distinguish two widgets
     def paintEvent(self, event):
         p = QPainter(self)
         p.setPen(Qt.NoPen)
@@ -52,13 +52,10 @@ class WidgetCreate(BaseWidget):
         self.create_btn = QPushButton("Create")
         self.create_btn.clicked.connect(self.create_node)
 
-        self.main_layout = main_layout = QVBoxLayout()
+        self.main_layout = main_layout = QVBoxLayout(self)
         main_layout.addWidget(QLabel(text="Create: ", parent=None))
         main_layout.addLayout(body_layout)
         main_layout.addWidget(self.create_btn)
-
-        # apply layout to self
-        self.setLayout(main_layout)
 
     def create_node(self):
         exp_text = self.name_text.toPlainText()
@@ -92,13 +89,10 @@ class WidgetDelete(BaseWidget):
         self.delete_btn = QPushButton("Delete")
         self.delete_btn.clicked.connect(self.delete_node)
 
-        self.main_layout = main_layout = QVBoxLayout()
+        self.main_layout = main_layout = QVBoxLayout(self)
         main_layout.addWidget(QLabel(text="Delete: ", parent=None))
         main_layout.addLayout(body_layout)
         main_layout.addWidget(self.delete_btn)
-
-        # apply layout to self
-        self.setLayout(main_layout)
 
     def delete_node(self):
         node_names = self.name_text.toPlainText().splitlines()

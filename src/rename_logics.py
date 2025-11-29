@@ -6,6 +6,10 @@ import maya.cmds as cmds
 
 def _select_uids():
     sel = cmds.ls(sl=True, long=True)
+
+    if not sel:
+        return []
+
     nodes = [
         n for s in sel
         for all_nodes in ([s], cmds.listRelatives(s, ad=True, pa=True) or [])

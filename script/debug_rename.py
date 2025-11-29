@@ -20,4 +20,4 @@ duplicate -rr;
 
 rename.add_name_prefix("_")
 rename.search_n_replace("gr", "GR")
-rename.regex_search_n_replace("o.p", "O.P")
+rename.regex_search_n_replace("o.p", "OUP")

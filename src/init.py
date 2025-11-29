@@ -7,7 +7,7 @@ import importlib as imp
 # import modules needed
 import config
 
-import create_parser, delete_dialog_parser, conn_dialog_parser
+import create_parser, delete_dialog_parser, conn_dialog_parser, rename_logics
 
 import create_dialog, delete_dialog, conn_dialog
 
@@ -23,6 +23,7 @@ modules = [
     create_parser,
     delete_dialog_parser,
     conn_dialog_parser,
+    rename_logics,
 
     create_dialog,
     delete_dialog,

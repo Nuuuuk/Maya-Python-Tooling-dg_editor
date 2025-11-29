@@ -16,6 +16,29 @@ class BaseWidget(QWidget):
         super(BaseWidget, self).__init__(parent)
         self.main_layout = QVBoxLayout(self)
 
+    def add_header(self, text):
+        """add top header"""
+        self.main_layout.addWidget(QLabel(text))
+
+    def add_row(self, text, widget=None):
+        """
+        create a [Label (80px, Right)] + [Widget] horizontal layout
+        if widget is None, create a QLineEdit
+        """
+        h_layout = QHBoxLayout()
+        label = QLabel(text)
+        label.setAlignment(Qt.AlignRight)
+        label.setFixedWidth(80)
+
+        if widget is None: widget = QLineEdit()
+
+        h_layout.addWidget(label)
+        h_layout.addWidget(widget)
+
+        self.main_layout.addLayout(h_layout)
+
+        return h_layout, widget
+
     # a faint background to distinguish two widgets
     def paintEvent(self, event):
         p = QPainter(self)
@@ -28,38 +51,18 @@ class BaseWidget(QWidget):
 class WidgetPrefix(BaseWidget):
     def __init__(self, parent=None):
         super(WidgetPrefix, self).__init__(parent)
-        self.body_layout = QHBoxLayout()
-        label = QLabel("Prefix:")
-        label.setAlignment(Qt.AlignRight)
-        label.setFixedWidth(80)
-        self.text_input = QLineEdit()
-        self.exec_btn = QPushButton("Add")
-        self.body_layout.addWidget(label)
-        self.body_layout.addWidget(self.text_input)
-        self.body_layout.addWidget(self.exec_btn)
 
-        self.main_layout.addWidget(QLabel("Add Prefix"))
-        self.main_layout.addLayout(self.body_layout)
+        self.add_header("Add Prefix")
+        body_layout, self.text_input = self.add_row("Prefix:")
+
+        # button at the end
+        self.exec_btn = QPushButton("Add")
+        body_layout.addWidget(self.exec_btn)
 
 
 class WidgetReplace(BaseWidget):
     def __init__(self, parent=None):
         super(WidgetReplace, self).__init__(parent)
-        self.search_layout = search_layout = QHBoxLayout()
-        label1 = QLabel("Search:")
-        label1.setAlignment(Qt.AlignRight)
-        label1.setFixedWidth(80)
-        self.search_input = QLineEdit()
-        search_layout.addWidget(label1)
-        search_layout.addWidget(self.search_input)
-
-        self.replace_layout = replace_layout = QHBoxLayout()
-        label2 = QLabel("Replace:")
-        label2.setAlignment(Qt.AlignRight)
-        label2.setFixedWidth(80)
-        self.replace_input = QLineEdit()
-        replace_layout.addWidget(label2)
-        replace_layout.addWidget(self.replace_input)
 
         self.btn_layout = btn_layout = QHBoxLayout()
         self.normal_btn = QPushButton("Normal Replace")
@@ -67,9 +70,9 @@ class WidgetReplace(BaseWidget):
         btn_layout.addWidget(self.normal_btn)
         btn_layout.addWidget(self.regex_btn)
 
-        self.main_layout.addWidget(QLabel("Search and Replace"))
-        self.main_layout.addLayout(self.search_layout)
-        self.main_layout.addLayout(self.replace_layout)
+        self.add_header("Search and Replace")
+        search_layout, self.search_input = self.add_row("Search:")
+        replace_layout, self.replace_input = self.add_row("Replace:")
         self.main_layout.addLayout(self.btn_layout)
 
         self.main_layout.addStretch()

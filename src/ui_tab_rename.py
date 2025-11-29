@@ -5,11 +5,11 @@ Rename Tab
 # for py2
 from __future__ import unicode_literals, print_function
 
-import config
-import sys
 from PySide2.QtGui import *
 from PySide2.QtCore import Qt
 from PySide2.QtWidgets import *
+
+import rename_logics
 
 class BaseWidget(QWidget):
     def __init__(self, parent=None):
@@ -56,17 +56,26 @@ class WidgetPrefix(BaseWidget):
         body_layout, self.text_input = self.add_row("Prefix:")
 
         # button at the end
-        self.exec_btn = QPushButton("Add")
-        body_layout.addWidget(self.exec_btn)
+        self.add_btn = QPushButton("Add")
+        self.add_btn.clicked.connect(self.add_name_prefix)
 
+        body_layout.addWidget(self.add_btn)
+
+    def add_name_prefix(self):
+        rename_logics.add_name_prefix(self.text_input.text())
 
 class WidgetReplace(BaseWidget):
     def __init__(self, parent=None):
         super(WidgetReplace, self).__init__(parent)
 
         self.btn_layout = btn_layout = QHBoxLayout()
+
         self.normal_btn = QPushButton("Normal Replace")
+        self.normal_btn.clicked.connect(self.replace)
+
         self.regex_btn = QPushButton("Regex Replace")
+        self.regex_btn.clicked.connect(self.regex_replace)
+
         btn_layout.addWidget(self.normal_btn)
         btn_layout.addWidget(self.regex_btn)
 
@@ -76,6 +85,12 @@ class WidgetReplace(BaseWidget):
         self.main_layout.addLayout(self.btn_layout)
 
         self.main_layout.addStretch()
+
+    def replace(self):
+        rename_logics.search_n_replace(self.search_input.text(), self.replace_input.text())
+
+    def regex_replace(self):
+        rename_logics.regex_search_n_replace(self.search_input.text(), self.replace_input.text())
 
 
 class WidgetRename(QWidget):

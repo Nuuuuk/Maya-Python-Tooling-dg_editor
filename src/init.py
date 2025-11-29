@@ -11,7 +11,7 @@ import create_parser, delete_dialog_parser, conn_dialog_parser
 
 import create_dialog, delete_dialog, conn_dialog
 
-import ui_tab_nodes, ui_tab_connections
+import ui_tab_nodes, ui_tab_connections, ui_tab_rename
 
 import ui_main_window
 
@@ -30,6 +30,7 @@ modules = [
 
     ui_tab_nodes,
     ui_tab_connections,
+    ui_tab_rename,
 
     ui_main_window,
 ]

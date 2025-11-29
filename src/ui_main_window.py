@@ -10,6 +10,7 @@ from shiboken2 import wrapInstance
 
 import ui_tab_nodes as utn
 import ui_tab_connections as utc
+import ui_tab_rename as utr
 
 if sys.version_info.major >= 3:
     long = int # shim
@@ -44,6 +45,7 @@ class DGEditorWindow(QWidget):
         self.tab = tab = QTabWidget(self)
         tab.addTab(utn.new(), "Node")
         tab.addTab(utc.new(), "Connection")
+        tab.addTab(utr.new(), "Rename")
         tab.addTab(QLabel(text="Settings", parent=None), "Settings")
 
         # add widget to layout

@@ -29,7 +29,17 @@ class WidgetPrefix(BaseWidget):
     def __init__(self, parent=None):
         super(WidgetPrefix, self).__init__(parent)
         self.body_layout = QHBoxLayout()
+        label = QLabel("Prefix:")
+        label.setAlignment(Qt.AlignRight)
+        label.setFixedWidth(80)
+        self.text_input = QLineEdit()
+        self.exec_btn = QPushButton("Add")
+        self.body_layout.addWidget(label)
+        self.body_layout.addWidget(self.text_input)
+        self.body_layout.addWidget(self.exec_btn)
+
         self.main_layout.addWidget(QLabel("Add Prefix"))
+        self.main_layout.addLayout(self.body_layout)
 
 
 class WidgetReplace(BaseWidget):

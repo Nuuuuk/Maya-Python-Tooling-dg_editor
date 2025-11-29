@@ -46,7 +46,31 @@ class WidgetReplace(BaseWidget):
     def __init__(self, parent=None):
         super(WidgetReplace, self).__init__(parent)
         self.search_layout = search_layout = QHBoxLayout()
+        label1 = QLabel("Search:")
+        label1.setAlignment(Qt.AlignRight)
+        label1.setFixedWidth(80)
+        self.search_input = QLineEdit()
+        search_layout.addWidget(label1)
+        search_layout.addWidget(self.search_input)
+
+        self.replace_layout = replace_layout = QHBoxLayout()
+        label2 = QLabel("Replace:")
+        label2.setAlignment(Qt.AlignRight)
+        label2.setFixedWidth(80)
+        self.replace_input = QLineEdit()
+        replace_layout.addWidget(label2)
+        replace_layout.addWidget(self.replace_input)
+
+        self.btn_layout = btn_layout = QHBoxLayout()
+        self.normal_btn = QPushButton("Normal Replace")
+        self.regex_btn = QPushButton("Regex Replace")
+        btn_layout.addWidget(self.normal_btn)
+        btn_layout.addWidget(self.regex_btn)
+
         self.main_layout.addWidget(QLabel("Search and Replace"))
+        self.main_layout.addLayout(self.search_layout)
+        self.main_layout.addLayout(self.replace_layout)
+        self.main_layout.addLayout(self.btn_layout)
 
         self.main_layout.addStretch()
 

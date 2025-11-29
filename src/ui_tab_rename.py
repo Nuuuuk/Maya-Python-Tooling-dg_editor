@@ -98,7 +98,7 @@ class WidgetRename(QWidget):
         super(WidgetRename, self).__init__(parent)
 
         # create an empty vertical layout
-        self.widget_layout = layout = QVBoxLayout()
+        self.widget_layout = layout = QVBoxLayout(self)
         # layout.setContentsMargins(0, 0, 0, 0)
 
         self.widget_a = widget_a = WidgetPrefix(self)
@@ -107,8 +107,6 @@ class WidgetRename(QWidget):
         layout.addWidget(widget_a)
         layout.addWidget(widget_b)
 
-        #apply layout to widget
-        self.setLayout(layout)
 
 def new():
     return WidgetRename()

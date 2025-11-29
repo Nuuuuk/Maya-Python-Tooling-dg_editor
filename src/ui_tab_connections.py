@@ -19,12 +19,10 @@ class WidgetFuncSelect(QWidget):
         self.func_combo.addItem(self.ConnectText)
         self.func_combo.addItem(self.DisconnectText)
 
-        self.main_layout = layout = QHBoxLayout()
+        self.main_layout = layout = QHBoxLayout(self)
         layout.addWidget(QLabel('Function:'))
         layout.addWidget(self.func_combo)
         layout.addStretch(0)
-
-        self.setLayout(layout)
 
     def func(self):
         if self.func_combo.currentText() == self.ConnectText:
@@ -44,11 +42,9 @@ class MatchWidget(QWidget):
         self.match_exp_btn_layout = QVBoxLayout()
         self.match_exp_btn_layout.addWidget(self.match_exp_btn)
         self.match_exp_btn_layout.addStretch()
-        self.body_layout = body_layout = QHBoxLayout()
+        self.body_layout = body_layout = QHBoxLayout(self)
         body_layout.addWidget(self.text_box)
         body_layout.addLayout(self.match_exp_btn_layout)
-
-        self.setLayout(body_layout)
 
     def match(self):
         names = conn_dialog.exec_()
@@ -63,7 +59,7 @@ class WidgetConnections(QWidget):
         super(WidgetConnections, self).__init__(parent)
 
         # create an empty vertical layout
-        self.main_layout = layout = QVBoxLayout()
+        self.main_layout = layout = QVBoxLayout(self)
         # layout.setContentsMargins(0, 0, 0, 0)
         self.widget_func_select = widget_func_select = WidgetFuncSelect(self)
         self.widget_match_out_attrs = MatchWidget(self)
@@ -78,9 +74,6 @@ class WidgetConnections(QWidget):
         layout.addWidget(QLabel('To Attributes:'))
         layout.addWidget(self.widget_match_in_attrs)
         layout.addWidget(self.exec_btn)
-
-        #apply layout to widget
-        self.setLayout(layout)
 
     def execute(self):
         out_attrs = self.widget_match_out_attrs.get_attrs()

@@ -38,7 +38,7 @@ class DGEditorWindow(QWidget):
         self.setWindowTitle("dg editor {}".format(config.VERSION))
 
         # create an empty vertical layout
-        self.main_layout = layout = QVBoxLayout()
+        self.main_layout = layout = QVBoxLayout(self)
         layout.setContentsMargins(1, 1, 1, 1)
 
         # create widget
@@ -51,8 +51,6 @@ class DGEditorWindow(QWidget):
         # add widget to layout
         layout.addWidget(tab)
 
-        # apply layout to widget
-        self.setLayout(layout)
 
 def new():
     win = DGEditorWindow()

@@ -5,17 +5,15 @@ Node Tab
 # for py2
 from __future__ import unicode_literals, print_function
 
-import config
-import sys
 from PySide2.QtGui import *
 from PySide2.QtCore import Qt
 from PySide2.QtWidgets import *
 
 import maya.cmds as cmds
 
-import create_parser
-import create_dialog
-import delete_dialog
+import nodes_create
+import ui_nodes_create_dialog
+import ui_nodes_delete_dialog
 
 class BaseWidget(QWidget):
     def __init__(self, parent=None):
@@ -59,11 +57,11 @@ class WidgetCreate(BaseWidget):
 
     def create_node(self):
         exp_text = self.name_text.toPlainText()
-        for name, type in create_parser.Exp(exp_text):
+        for name, type in nodes_create.Exp(exp_text):
             cmds.createNode(type, name=name)
 
     def create_dialog(self):
-        names = create_dialog.exec_()
+        names = ui_nodes_create_dialog.exec_()
         self.name_text.setPlainText("\n".join(("{}: {}".format(n,t) for n,t in names)))
 
 # lower layout to delete nodes
@@ -100,7 +98,7 @@ class WidgetDelete(BaseWidget):
         cmds.delete(node_names)
 
     def delete_dialog(self):
-        names = delete_dialog.exec_()
+        names = ui_nodes_delete_dialog.exec_()
         self.name_text.setPlainText("\n".join(names))
 
 

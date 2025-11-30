@@ -5,9 +5,8 @@ a dialog from Create Widget in Node Tab to generate expression
 # for py2
 from __future__ import unicode_literals, print_function
 
-from PySide2.QtCore import Qt
 from PySide2.QtWidgets import *
-import create_dialog_parser
+import nodes_create_dialog
 
 class ExpGenDialog(QDialog):
     def __init__(self, parent=None):
@@ -38,7 +37,7 @@ class ExpGenDialog(QDialog):
         type_ = self.type_line_edit.text()
         values = [{"id": i} for i in range(num)]
 
-        self.name_types = [(n, type_) for n in create_dialog_parser.parse(exp, values)]
+        self.name_types = [(n, type_) for n in nodes_create_dialog.parse(exp, values)]
 
         # close dialog after generation
         self.close()

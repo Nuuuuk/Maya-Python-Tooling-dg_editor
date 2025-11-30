@@ -1,8 +1,8 @@
 import importlib as imp
 import init
-import delete_dialog
+import ui_nodes_delete_dialog
 
 # reload
 imp.reload(init)
 
-win = delete_dialog.exec_()
+win = ui_nodes_delete_dialog.exec_()

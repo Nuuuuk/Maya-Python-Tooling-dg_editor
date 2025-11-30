@@ -8,9 +8,9 @@ from PySide2.QtWidgets import *
 from maya.OpenMayaUI import MQtUtil
 from shiboken2 import wrapInstance
 
-import ui_tab_nodes as utn
-import ui_tab_connections as utc
-import ui_tab_rename as utr
+import ui_nodes as un
+import ui_connect as uc
+import ui_rename as ur
 
 if sys.version_info.major >= 3:
     long = int # shim
@@ -43,9 +43,9 @@ class DGEditorWindow(QWidget):
 
         # create widget
         self.tab = tab = QTabWidget(self)
-        tab.addTab(utn.new(), "Node")
-        tab.addTab(utc.new(), "Connection")
-        tab.addTab(utr.new(), "Rename")
+        tab.addTab(un.new(), "Node Create")
+        tab.addTab(uc.new(), "Connection")
+        tab.addTab(ur.new(), "Rename")
         tab.addTab(QLabel(text="Settings", parent=None), "Settings")
 
         # add widget to layout

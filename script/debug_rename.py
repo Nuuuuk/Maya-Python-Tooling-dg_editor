@@ -1,6 +1,6 @@
 import importlib as imp
 import init
-import rename_logics as rename
+import rename as rename
 import maya.mel as mel
 
 # reload

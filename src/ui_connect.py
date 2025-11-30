@@ -44,7 +44,7 @@ class MatchWidget(QWidget):
         body_layout.addLayout(self.match_exp_btn_layout)
 
     def match(self):
-        names = ui_connect_dialog.exec_()
+        names = ui_connect_dialog.exec_(self)
         self.text_box.setPlainText("\n".join(names))
 
     def get_attrs(self):

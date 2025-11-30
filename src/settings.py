@@ -25,6 +25,6 @@ def set(key, val):
     _save_json(data)
 
 
-def get(key, default):
+def get(key, default=7):
     data = _get_json()
     return data.get(key, default)

@@ -19,7 +19,7 @@ class DelMatchDialog(QDialog):
 
         self.name_line_edit = QLineEdit(self)
         self.match_bn = QPushButton("Match")
-        self.match_bn.clicked.connect(self.gen)
+        self.match_bn.clicked.connect(self.match)
 
 
         self.main_layout.addWidget(QLabel("Regex: "))
@@ -35,10 +35,10 @@ class DelMatchDialog(QDialog):
         font.setPointSize(font_size)
         self.setFont(font)
 
-    def gen(self):
+    def match(self):
         self.names = list(nodes_delete_dialog.get_matched_nodes(self.name_line_edit.text()))
 
-        # close dialog after generation
+        # close dialog after Match
         self.close()
 
 def exec_(parent=None):

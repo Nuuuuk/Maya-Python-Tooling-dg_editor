@@ -52,6 +52,7 @@ class ExpGenDialog(QDialog):
         # close dialog after generation
         self.close()
 
+
 def exec_(parent=None):
     dia = ExpGenDialog(parent)
     dia.exec_()

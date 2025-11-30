@@ -7,6 +7,7 @@ from __future__ import unicode_literals, print_function
 
 from PySide2.QtWidgets import *
 import nodes_create_dialog
+import settings
 
 class ExpGenDialog(QDialog):
     def __init__(self, parent=None):
@@ -30,6 +31,15 @@ class ExpGenDialog(QDialog):
         self.main_layout.addWidget(QLabel("Node Num: "))
         self.main_layout.addWidget(self.node_num)
         self.main_layout.addWidget(self.gen_bn)
+
+        # apply font size
+        self.set_font_size()
+
+    def set_font_size(self):
+        font_size = settings.get('font_size')
+        font = self.font()
+        font.setPointSize(font_size)
+        self.setFont(font)
 
     def gen(self):
         num = self.node_num.value()

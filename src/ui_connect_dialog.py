@@ -8,6 +8,7 @@ from __future__ import unicode_literals, print_function
 from PySide2.QtWidgets import *
 
 import nodes_connect_dialog
+import settings
 
 class ConnMatchDialog(QDialog):
     def __init__(self, parent=None):
@@ -24,6 +25,15 @@ class ConnMatchDialog(QDialog):
         self.main_layout.addWidget(QLabel("Regex: "))
         self.main_layout.addWidget(self.name_line_edit)
         self.main_layout.addWidget(self.match_bn)
+
+        # apply font size
+        self.set_font_size()
+
+    def set_font_size(self):
+        font_size = settings.get('font_size')
+        font = self.font()
+        font.setPointSize(font_size)
+        self.setFont(font)
 
     def gen(self):
         self.names = list(nodes_connect_dialog.get_matched_nodes(self.name_line_edit.text()))

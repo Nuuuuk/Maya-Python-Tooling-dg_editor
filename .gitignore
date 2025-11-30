@@ -10,3 +10,6 @@ __pycache__/
 
 # 4. ignore Maya thumbnails
 .mayaSwatches/
+
+# 5. ignore generated settins.json
+/src/settings.json

@@ -7,7 +7,7 @@ import importlib as imp
 # import modules needed
 import config
 
-import nodes_create, nodes_delete_dialog, nodes_connect_dialog, rename
+import nodes_create, nodes_delete_dialog, nodes_connect_dialog, rename, settings
 
 import ui_nodes_create_dialog, ui_nodes_delete_dialog, ui_connect_dialog
 
@@ -24,6 +24,7 @@ modules = [
     nodes_delete_dialog,
     nodes_connect_dialog,
     rename,
+    settings,
 
     ui_nodes_create_dialog,
     ui_nodes_delete_dialog,

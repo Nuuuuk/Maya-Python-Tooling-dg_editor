@@ -25,6 +25,11 @@ def set(key, val):
     _save_json(data)
 
 
-def get(key, default=7):
+def get(key, default):
     data = _get_json()
     return data.get(key, default)
+
+
+# default settings
+def get_font_size():
+    return get('font_size', 10)

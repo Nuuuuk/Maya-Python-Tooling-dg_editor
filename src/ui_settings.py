@@ -26,7 +26,7 @@ class FontSizeWidget(QWidget):
         self.main_layout.addStretch()
 
     def get_font_size(self):
-        return settings.get("font_size")
+        return settings.get_font_size()
 
     def set_font_size(self):
         settings.set("font_size", self.font_size_input.value())

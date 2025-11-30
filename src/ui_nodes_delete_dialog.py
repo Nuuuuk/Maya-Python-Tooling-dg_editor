@@ -30,7 +30,7 @@ class DelMatchDialog(QDialog):
         self.set_font_size()
 
     def set_font_size(self):
-        font_size = settings.get('font_size')
+        font_size = settings.get_font_size()
         font = self.font()
         font.setPointSize(font_size)
         self.setFont(font)

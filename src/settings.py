@@ -3,9 +3,9 @@ from __future__ import unicode_literals, print_function
 
 import json, os
 import codecs
+import config
 
-PATH = os.path.dirname(os.path.abspath(__file__))
-JSON_PATH = os.path.join(PATH, "settings.json")
+JSON_PATH = os.path.join(config.PATH, "settings.json")
 
 def _get_json():
     if not os.path.isfile(JSON_PATH):

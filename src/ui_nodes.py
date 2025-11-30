@@ -62,6 +62,9 @@ class WidgetCreate(BaseWidget):
 
     def create_dialog(self):
         names = ui_nodes_create_dialog.exec_(self)
+        if names is None:
+            cmds.warning("Operation cancelled")
+            return
         self.name_text.setPlainText("\n".join(("{}: {}".format(n,t) for n,t in names)))
 
 # lower layout to delete nodes
@@ -99,6 +102,9 @@ class WidgetDelete(BaseWidget):
 
     def delete_dialog(self):
         names = ui_nodes_delete_dialog.exec_(self)
+        if names is None:
+            cmds.warning("Operation cancelled")
+            return
         self.name_text.setPlainText("\n".join(names))
 
 

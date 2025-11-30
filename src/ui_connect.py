@@ -45,6 +45,9 @@ class MatchWidget(QWidget):
 
     def match(self):
         names = ui_connect_dialog.exec_(self)
+        if names is None:
+            cmds.warning("Operation cancelled")
+            return
         self.text_box.setPlainText("\n".join(names))
 
     def get_attrs(self):

@@ -11,6 +11,7 @@ from shiboken2 import wrapInstance
 import ui_nodes as un
 import ui_connect as uc
 import ui_rename as ur
+import ui_settings as us
 
 if sys.version_info.major >= 3:
     long = int # shim
@@ -46,7 +47,7 @@ class DGEditorWindow(QWidget):
         tab.addTab(un.new(), "Node Create")
         tab.addTab(uc.new(), "Connection")
         tab.addTab(ur.new(), "Rename")
-        tab.addTab(QLabel(text="Settings", parent=None), "Settings")
+        tab.addTab(us.new(), "Settings")
 
         # add widget to layout
         layout.addWidget(tab)

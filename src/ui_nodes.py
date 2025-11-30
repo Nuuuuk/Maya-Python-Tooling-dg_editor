@@ -57,7 +57,7 @@ class WidgetCreate(BaseWidget):
 
     def create_node(self):
         exp_text = self.name_text.toPlainText()
-        for name, type in nodes_create.Exp(exp_text):
+        for name, type in nodes_create.parser(exp_text):
             cmds.createNode(type, name=name)
 
     def create_dialog(self):

@@ -1,12 +1,9 @@
 # for py2
 from __future__ import unicode_literals, print_function
 
-import config
-import sys
-from PySide2.QtCore import Qt
 from PySide2.QtWidgets import *
 import maya.cmds as cmds
-import conn_dialog
+import ui_connect_dialog
 
 class WidgetFuncSelect(QWidget):
     Connect, Disconnect = range(2)
@@ -47,7 +44,7 @@ class MatchWidget(QWidget):
         body_layout.addLayout(self.match_exp_btn_layout)
 
     def match(self):
-        names = conn_dialog.exec_()
+        names = ui_connect_dialog.exec_()
         self.text_box.setPlainText("\n".join(names))
 
     def get_attrs(self):

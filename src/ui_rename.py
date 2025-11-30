@@ -9,7 +9,7 @@ from PySide2.QtGui import *
 from PySide2.QtCore import Qt
 from PySide2.QtWidgets import *
 
-import rename_logics
+import rename
 
 class BaseWidget(QWidget):
     def __init__(self, parent=None):
@@ -62,7 +62,7 @@ class WidgetPrefix(BaseWidget):
         body_layout.addWidget(self.add_btn)
 
     def add_name_prefix(self):
-        rename_logics.add_name_prefix(self.text_input.text())
+        rename.add_name_prefix(self.text_input.text())
 
 class WidgetReplace(BaseWidget):
     def __init__(self, parent=None):
@@ -87,10 +87,10 @@ class WidgetReplace(BaseWidget):
         self.main_layout.addStretch()
 
     def replace(self):
-        rename_logics.search_n_replace(self.search_input.text(), self.replace_input.text())
+        rename.search_n_replace(self.search_input.text(), self.replace_input.text())
 
     def regex_replace(self):
-        rename_logics.regex_search_n_replace(self.search_input.text(), self.replace_input.text())
+        rename.regex_search_n_replace(self.search_input.text(), self.replace_input.text())
 
 
 class WidgetRename(QWidget):

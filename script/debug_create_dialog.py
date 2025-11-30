@@ -1,8 +1,8 @@
 import importlib as imp
 import init
-import create_dialog
+import ui_nodes_create_dialog
 
 # reload
 imp.reload(init)
 
-win = create_dialog.exec_()
+win = ui_nodes_create_dialog.exec_()

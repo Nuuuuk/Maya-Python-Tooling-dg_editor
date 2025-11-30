@@ -7,7 +7,7 @@ from __future__ import unicode_literals, print_function
 
 from PySide2.QtWidgets import *
 
-import delete_dialog_parser
+import nodes_delete_dialog
 
 class DelMatchDialog(QDialog):
     def __init__(self, parent=None):
@@ -26,7 +26,7 @@ class DelMatchDialog(QDialog):
         self.main_layout.addWidget(self.match_bn)
 
     def gen(self):
-        self.names = list(delete_dialog_parser.get_matched_nodes(self.name_line_edit.text()))
+        self.names = list(nodes_delete_dialog.get_matched_nodes(self.name_line_edit.text()))
 
         # close dialog after generation
         self.close()

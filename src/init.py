@@ -7,33 +7,33 @@ import importlib as imp
 # import modules needed
 import config
 
-import create_parser, delete_dialog_parser, conn_dialog_parser, rename_logics
+import nodes_create, nodes_delete_dialog, nodes_connect_dialog, rename
 
-import create_dialog, delete_dialog, conn_dialog
+import ui_nodes_create_dialog, ui_nodes_delete_dialog, ui_connect_dialog
 
-import ui_tab_nodes, ui_tab_connections, ui_tab_rename
+import ui_nodes, ui_connect, ui_rename
 
-import ui_main_window
+import ui__main_window
 
 
 # reload config at first
 imp.reload(config)
 
 modules = [
-    create_parser,
-    delete_dialog_parser,
-    conn_dialog_parser,
-    rename_logics,
+    nodes_create,
+    nodes_delete_dialog,
+    nodes_connect_dialog,
+    rename,
 
-    create_dialog,
-    delete_dialog,
-    conn_dialog,
+    ui_nodes_create_dialog,
+    ui_nodes_delete_dialog,
+    ui_connect_dialog,
 
-    ui_tab_nodes,
-    ui_tab_connections,
-    ui_tab_rename,
+    ui_nodes,
+    ui_connect,
+    ui_rename,
 
-    ui_main_window,
+    ui__main_window,
 ]
 
 if config.DEBUG:

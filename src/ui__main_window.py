@@ -12,6 +12,7 @@ import ui_nodes as un
 import ui_connect as uc
 import ui_rename as ur
 import ui_settings as us
+import settings
 
 if sys.version_info.major >= 3:
     long = int # shim
@@ -51,6 +52,15 @@ class DGEditorWindow(QWidget):
 
         # add widget to layout
         layout.addWidget(tab)
+
+        # apply font size
+        self.set_font_size()
+
+    def set_font_size(self):
+        font_size = settings.get('font_size')
+        font = self.font()
+        font.setPointSize(font_size)
+        self.setFont(font)
 
 
 def new():

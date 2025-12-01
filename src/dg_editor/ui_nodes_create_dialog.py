@@ -9,6 +9,7 @@ from PySide2.QtWidgets import *
 
 from . import nodes_create_dialog
 from .widgets import BaseDialog
+from . import settings
 
 class ExpGenDialog(BaseDialog):
     def __init__(self, parent=None):
@@ -19,11 +20,13 @@ class ExpGenDialog(BaseDialog):
         self.node_num = QSpinBox(self)
         self.node_num.setRange(1, 999)
         self.name_line_edit = QLineEdit(self)
-        self.name_line_edit.setText("prefix_{id}_suffix")
         self.type_line_edit = QLineEdit(self)
-        self.type_line_edit.setText("joint")
         self.gen_bn = QPushButton("Generate")
         self.gen_bn.clicked.connect(self.gen)
+
+        settings.bind_lineedit(self.name_line_edit, 'node_create_name', 'prefix_{id}_suffix')
+        settings.bind_lineedit(self.type_line_edit, 'node_create_type', 'joint')
+        settings.bind_spinbox(self.node_num, 'node_create_num', 10)
 
         self.main_layout.addWidget(QLabel("Name: "))
         self.main_layout.addWidget(self.name_line_edit)

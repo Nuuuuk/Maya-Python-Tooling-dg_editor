@@ -7,6 +7,7 @@ import maya.cmds as cmds
 from .widgets import BaseWidget
 from . import ui_connect_dialog
 from .utils import undo_block
+from . import settings
 
 class WidgetFuncSelect(BaseWidget):
     Connect, Disconnect = range(2)
@@ -20,7 +21,9 @@ class WidgetFuncSelect(BaseWidget):
         self.func_combo.addItem(self.ConnectText)
         self.func_combo.addItem(self.DisconnectText)
 
-        self.add_input_row('Function', self.func_combo, False)
+        settings.bind_combobox(self.func_combo, 'conn_operation', 'Connect')
+
+        self.add_input_row('Operation', self.func_combo, False)
 
     def func(self):
         if self.func_combo.currentText() == self.ConnectText:

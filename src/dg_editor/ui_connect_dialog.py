@@ -9,6 +9,7 @@ from PySide2.QtWidgets import *
 
 from . import connect_dialog
 from .widgets import BaseDialog
+from . import settings
 
 class ConnMatchDialog(BaseDialog):
     def __init__(self, parent=None):
@@ -20,6 +21,7 @@ class ConnMatchDialog(BaseDialog):
         self.match_bn = QPushButton("Match")
         self.match_bn.clicked.connect(self.match)
 
+        settings.bind_lineedit(self.name_line_edit, 'conn_regex', 'pSphere.*\.translateX')
 
         self.main_layout.addWidget(QLabel("Regex: "))
         self.main_layout.addWidget(self.name_line_edit)

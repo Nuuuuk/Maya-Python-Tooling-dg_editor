@@ -19,20 +19,43 @@ def _save_json(data):
         json.dump(data, f)
 
 
-def set(key, val):
+def _set(key, val):
     data = _get_json()
     data[key] = val
     _save_json(data)
 
 
-def get(key, default):
+def _get(key, default):
     data = _get_json()
     return data.get(key, default)
 
 
 # default settings
 def get_font_size():
-    return get('font_size', 10)
+    return _get('font_size', 10)
+
 
 def get_undo_check():
-    return get('undo_check', True)
+    return _get('undo_check', True)
+
+
+# UI Binding Helpers
+def bind_checkbox(widget, key, default=True):
+    current_val = _get(key, default)
+    widget.setChecked(bool(current_val))
+
+    # toggled auto returns val
+    widget.toggled.connect(lambda val: _set(key, val))
+
+
+def bind_spinbox(widget, key, default=10):
+    current_val = _get(key, default)
+
+    # make sure it's number
+    try:
+        widget.setValue(float(current_val))
+    except ValueError:
+        widget.setValue(default)
+
+    # valueChanged auto returns val
+    widget.valueChanged.connect(lambda val: _set(key, val))

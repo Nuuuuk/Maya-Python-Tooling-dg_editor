@@ -1,10 +1,9 @@
 import importlib as imp
-import init
-import rename as rename
+from dg_editor import rename as rename, reloader
 import maya.mel as mel
 
 # reload
-imp.reload(init)
+imp.reload(reloader)
 
 mel.eval("""
 polySphere -r 1 -sx 20 -sy 20 -ax 0 1 0 -cuv 2 -ch 1;

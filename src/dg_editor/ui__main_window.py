@@ -1,18 +1,18 @@
 # for py2
 from __future__ import unicode_literals, print_function
 
-import config
 import sys
 from PySide2.QtCore import Qt
 from PySide2.QtWidgets import *
 from maya.OpenMayaUI import MQtUtil
 from shiboken2 import wrapInstance
 
-import ui_nodes as un
-import ui_connect as uc
-import ui_rename as ur
-import ui_settings as us
-import settings
+from . import config
+from . import ui_nodes as un
+from . import ui_connect as uc
+from . import ui_rename as ur
+from . import ui_settings as us
+from . import settings
 
 if sys.version_info.major >= 3:
     long = int # shim

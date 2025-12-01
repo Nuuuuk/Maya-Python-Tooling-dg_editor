@@ -7,8 +7,8 @@ from __future__ import unicode_literals, print_function
 
 from PySide2.QtWidgets import *
 
-import nodes_create_dialog
-from widgets import BaseDialog
+from . import nodes_create_dialog
+from .widgets import BaseDialog
 
 class ExpGenDialog(BaseDialog):
     def __init__(self, parent=None):
@@ -19,7 +19,9 @@ class ExpGenDialog(BaseDialog):
         self.node_num = QSpinBox(self)
         self.node_num.setRange(1, 999)
         self.name_line_edit = QLineEdit(self)
+        self.name_line_edit.setText("prefix_{id}_suffix")
         self.type_line_edit = QLineEdit(self)
+        self.type_line_edit.setText("joint")
         self.gen_bn = QPushButton("Generate")
         self.gen_bn.clicked.connect(self.gen)
 
@@ -44,7 +46,3 @@ class ExpGenDialog(BaseDialog):
 
 def show(parent=None):
     return ExpGenDialog.show_ui(parent)
-# def exec_(parent=None):
-#     dia = ExpGenDialog(parent)
-#     dia.exec_()
-#     return dia.results

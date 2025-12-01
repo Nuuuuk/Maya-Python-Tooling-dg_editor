@@ -2,10 +2,9 @@
 from __future__ import unicode_literals, print_function
 
 import importlib as imp
-import init
-import ui_nodes_create_dialog
+from dg_editor import ui_nodes_create_dialog, reloader
 
 # reload
-imp.reload(init)
+imp.reload(reloader)
 
-print(ui_nodes_create_dialog.exec_())
+print(ui_nodes_create_dialog.show())

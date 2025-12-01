@@ -3,7 +3,7 @@ from __future__ import unicode_literals, print_function
 
 import json, os
 import codecs
-import config
+from . import config
 
 JSON_PATH = os.path.join(config.PATH, "settings.json")
 

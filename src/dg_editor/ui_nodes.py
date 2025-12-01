@@ -5,17 +5,15 @@ Node Tab
 # for py2
 from __future__ import unicode_literals, print_function
 
-from PySide2.QtGui import *
-from PySide2.QtCore import Qt
 from PySide2.QtWidgets import *
 
 import maya.cmds as cmds
 
-from widgets import BaseWidget
-import nodes_create
-import ui_nodes_create_dialog
-import ui_nodes_delete_dialog
-from utils import undo_block
+from .widgets import BaseWidget
+from . import nodes_create
+from . import ui_nodes_create_dialog
+from . import ui_nodes_delete_dialog
+from .utils import undo_block
 
 
 # upper layout to create nodes

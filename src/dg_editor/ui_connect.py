@@ -4,9 +4,9 @@ from __future__ import unicode_literals, print_function
 from PySide2.QtWidgets import *
 import maya.cmds as cmds
 
-from widgets import BaseWidget
-import ui_connect_dialog
-from utils import undo_block
+from .widgets import BaseWidget
+from . import ui_connect_dialog
+from .utils import undo_block
 
 class WidgetFuncSelect(BaseWidget):
     Connect, Disconnect = range(2)

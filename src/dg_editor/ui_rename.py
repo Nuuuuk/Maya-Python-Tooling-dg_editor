@@ -5,13 +5,11 @@ Rename Tab
 # for py2
 from __future__ import unicode_literals, print_function
 
-from PySide2.QtGui import *
-from PySide2.QtCore import Qt
 from PySide2.QtWidgets import *
 
-from widgets import BaseWidget
-import rename
-from utils import undo_block
+from .widgets import BaseWidget
+from . import rename
+from .utils import undo_block
 
 
 class WidgetPrefix(BaseWidget):

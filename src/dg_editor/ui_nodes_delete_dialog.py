@@ -7,8 +7,8 @@ from __future__ import unicode_literals, print_function
 
 from PySide2.QtWidgets import *
 
-import nodes_delete_dialog
-from widgets import BaseDialog
+from . import nodes_delete_dialog
+from .widgets import BaseDialog
 
 class DelMatchDialog(BaseDialog):
     def __init__(self, parent=None):
@@ -32,8 +32,3 @@ class DelMatchDialog(BaseDialog):
 
 def show(parent=None):
     return DelMatchDialog.show_ui(parent)
-
-# def exec_(parent=None):
-#     dia = DelMatchDialog(parent)
-#     dia.exec_()
-#     return dia.results

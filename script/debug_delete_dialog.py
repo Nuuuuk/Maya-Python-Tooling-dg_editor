@@ -2,10 +2,9 @@
 from __future__ import unicode_literals, print_function
 
 import importlib as imp
-import init
-import ui_nodes_delete_dialog
+from dg_editor import reloader, ui_nodes_delete_dialog
 
 # reload
-imp.reload(init)
+imp.reload(reloader)
 
-print(ui_nodes_delete_dialog.exec_())
+print(ui_nodes_delete_dialog.show())

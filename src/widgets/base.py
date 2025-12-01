@@ -5,6 +5,8 @@ from PySide2.QtGui import *
 from PySide2.QtCore import Qt
 from PySide2.QtWidgets import *
 
+import settings
+
 
 class BaseWidget(QWidget):
     def __init__(self, parent=None):
@@ -23,7 +25,7 @@ class BaseWidget(QWidget):
         h_layout = QHBoxLayout()
         label = QLabel(text)
         label.setAlignment(Qt.AlignRight)
-        label.setFixedWidth(80)
+        label.setFixedWidth(100)
 
         if widget is None: widget = QLineEdit()
 
@@ -68,3 +70,27 @@ class BaseWidget(QWidget):
         self.main_layout.addLayout(body_layout)
 
         return body_layout, widget, btn
+
+
+class BaseDialog(QDialog):
+    def __init__(self, parent=None):
+        super(BaseDialog, self).__init__(parent)
+
+        self.results = []
+        self.apply_font()
+
+    def apply_font(self):
+        font_size = settings.get_font_size()
+        font = self.font()
+        font.setPointSize(font_size)
+        self.setFont(font)
+
+    @classmethod
+    def show_ui(cls, parent=None):
+        """
+        uniform entrance, replaces the outer exec_ function
+        """
+        dia = cls(parent)
+        if dia.exec_():
+            return dia.results
+        return []

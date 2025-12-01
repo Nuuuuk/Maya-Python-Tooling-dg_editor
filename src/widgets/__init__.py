@@ -13,4 +13,4 @@ if config.DEBUG:
     imp.reload(base)
 
 # expose class in init
-from .base import BaseWidget
+from .base import BaseWidget, BaseDialog

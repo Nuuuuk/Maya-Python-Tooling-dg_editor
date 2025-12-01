@@ -59,3 +59,24 @@ def bind_spinbox(widget, key, default=10):
 
     # valueChanged auto returns val
     widget.valueChanged.connect(lambda val: _set(key, val))
+
+
+def bind_lineedit(widget, key, default=""):
+    current_val = _get(key, default)
+    widget.setText(str(current_val))
+
+    # editingFinished doesnt return val
+    widget.editingFinished.connect(lambda: _set(key, widget.text()))
+
+
+def bind_combobox(widget, key, default=None):
+    # if default is None then use current selected
+    default = widget.currentText() if default is None else default
+
+    current_val = str(_get(key, default))
+    index = widget.findText(current_val)
+    if index != -1:
+        widget.setCurrentIndex(index)
+
+    # currentTextChanged auto returns val
+    widget.currentTextChanged.connect(lambda val: _set(key, val))

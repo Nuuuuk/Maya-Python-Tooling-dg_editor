@@ -15,6 +15,7 @@ from widgets import BaseWidget
 import nodes_create
 import ui_nodes_create_dialog
 import ui_nodes_delete_dialog
+from utils import undo_block
 
 
 # upper layout to create nodes
@@ -37,6 +38,7 @@ class WidgetCreate(BaseWidget):
 
         main_layout.addWidget(self.create_btn)
 
+    @undo_block
     def create_node(self):
         exp_text = self.name_text.toPlainText()
         for name, type in nodes_create.parser(exp_text):
@@ -69,6 +71,7 @@ class WidgetDelete(BaseWidget):
 
         main_layout.addWidget(self.delete_btn)
 
+    @undo_block
     def delete_node(self):
         node_names = self.name_text.toPlainText().splitlines()
         if len(node_names) < 1: return

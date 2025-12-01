@@ -33,3 +33,6 @@ def get(key, default):
 # default settings
 def get_font_size():
     return get('font_size', 10)
+
+def get_undo_check():
+    return get('undo_check', True)

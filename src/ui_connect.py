@@ -6,6 +6,7 @@ import maya.cmds as cmds
 
 from widgets import BaseWidget
 import ui_connect_dialog
+from utils import undo_block
 
 class WidgetFuncSelect(BaseWidget):
     Connect, Disconnect = range(2)
@@ -67,6 +68,7 @@ class WidgetConnections(BaseWidget):
         layout.addWidget(self.widget_match_in_attrs)
         layout.addWidget(self.exec_btn)
 
+    @undo_block
     def execute(self):
         out_attrs = self.widget_match_out_attrs.get_attrs()
         in_attrs = self.widget_match_in_attrs.get_attrs()

@@ -8,11 +8,10 @@ from __future__ import unicode_literals, print_function
 from PySide2.QtWidgets import *
 
 import nodes_delete_dialog
-import settings
+from widgets import BaseDialog
 
-class DelMatchDialog(QDialog):
+class DelMatchDialog(BaseDialog):
     def __init__(self, parent=None):
-        self.name_types = []
         super(DelMatchDialog, self).__init__(parent)
         self.setWindowTitle("Regular Expression Match")
         self.main_layout = QHBoxLayout(self)
@@ -21,27 +20,20 @@ class DelMatchDialog(QDialog):
         self.match_bn = QPushButton("Match")
         self.match_bn.clicked.connect(self.match)
 
-
         self.main_layout.addWidget(QLabel("Regex: "))
         self.main_layout.addWidget(self.name_line_edit)
         self.main_layout.addWidget(self.match_bn)
 
-        # apply font size
-        self.set_font_size()
-
-    def set_font_size(self):
-        font_size = settings.get_font_size()
-        font = self.font()
-        font.setPointSize(font_size)
-        self.setFont(font)
-
     def match(self):
-        self.names = list(nodes_delete_dialog.get_matched_nodes(self.name_line_edit.text()))
+        self.results = list(nodes_delete_dialog.get_matched_nodes(self.name_line_edit.text()))
 
-        # close dialog after Match
-        self.close()
+        # close dialog and return true after Match
+        self.accept()
 
-def exec_(parent=None):
-    dia = DelMatchDialog(parent)
-    dia.exec_()
-    return dia.names
+def show(parent=None):
+    return DelMatchDialog.show_ui(parent)
+
+# def exec_(parent=None):
+#     dia = DelMatchDialog(parent)
+#     dia.exec_()
+#     return dia.results

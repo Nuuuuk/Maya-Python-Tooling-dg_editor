@@ -25,9 +25,9 @@ def get_matched_nodes(pattern):
     # Get all nodes, then filter
     all_nodes = cmds.ls('*')
     for node in all_nodes:
-        attrs = cmds.listAttr(node)
+        attrs = cmds.listAttr(node) or []
         for attr in attrs:
-            attr = "{}.{}".format(node, attr) or []
+            attr = "{}.{}".format(node, attr)
             m = regex_obj.match(attr)
             if not m is None:
                 if m.group(0) == attr:

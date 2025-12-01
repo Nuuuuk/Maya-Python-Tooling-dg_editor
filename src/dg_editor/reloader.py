@@ -2,11 +2,18 @@
 from __future__ import unicode_literals, print_function
 
 import sys
-import importlib as imp
 
-import config
+if sys.version_info[0] >= 3:
+    import importlib
+    def _reload(m):
+        importlib.reload(m)
+else:
+    def _reload(m):
+        reload(m)
+
+from . import config
 # reload config at first
-imp.reload(config)
+_reload(config)
 
 # import modules needed
 from . import widgets
@@ -42,9 +49,12 @@ modules = [
 ]
 
 if config.DEBUG:
-    # reload everything
+    print("--- Reloading DG Editor Modules ---")
     for m in modules:
-        imp.reload(m)
+        try:
+            _reload(m)
+        except Exception as e:
+            print("Failed to reload {}: {}".format(m, e))
 
 else:
     pass

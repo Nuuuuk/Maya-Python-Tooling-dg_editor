@@ -49,8 +49,6 @@ class WidgetReplace(BaseWidget):
         replace_layout, self.replace_input = self.add_input_row("Replace:")
         self.main_layout.addLayout(self.btn_layout)
 
-        self.main_layout.addStretch()
-
     def replace(self):
         rename.search_n_replace(self.search_input.text(), self.replace_input.text())
 
@@ -71,6 +69,8 @@ class WidgetRename(QWidget):
 
         layout.addWidget(widget_a)
         layout.addWidget(widget_b)
+
+        layout.addStretch()
 
 
 def new():

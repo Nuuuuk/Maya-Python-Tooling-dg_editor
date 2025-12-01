@@ -11,7 +11,7 @@ imp.reload(config)
 # import modules needed
 import widgets
 
-import nodes_create, nodes_delete_dialog, nodes_connect_dialog, rename, settings
+import nodes_create, nodes_delete_dialog, connect_dialog, rename, settings
 
 import ui_nodes_create_dialog, ui_nodes_delete_dialog, ui_connect_dialog
 
@@ -25,7 +25,7 @@ modules = [
 
     nodes_create,
     nodes_delete_dialog,
-    nodes_connect_dialog,
+    connect_dialog,
     rename,
     settings,
 

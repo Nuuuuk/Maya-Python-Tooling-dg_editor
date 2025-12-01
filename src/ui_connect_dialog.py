@@ -7,7 +7,7 @@ from __future__ import unicode_literals, print_function
 
 from PySide2.QtWidgets import *
 
-import nodes_connect_dialog
+import connect_dialog
 from widgets import BaseDialog
 
 class ConnMatchDialog(BaseDialog):
@@ -26,7 +26,7 @@ class ConnMatchDialog(BaseDialog):
         self.main_layout.addWidget(self.match_bn)
 
     def match(self):
-        self.results = list(nodes_connect_dialog.get_matched_nodes(self.name_line_edit.text()))
+        self.results = list(connect_dialog.get_matched_nodes(self.name_line_edit.text()))
 
         # close dialog after Match
         self.accept()

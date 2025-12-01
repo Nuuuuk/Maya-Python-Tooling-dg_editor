@@ -12,7 +12,7 @@ import settings
 
 class ConnMatchDialog(QDialog):
     def __init__(self, parent=None):
-        self.name_types = []
+        self.results = []
         super(ConnMatchDialog, self).__init__(parent)
         self.setWindowTitle("Regular Expression Match")
         self.main_layout = QHBoxLayout(self)
@@ -36,7 +36,7 @@ class ConnMatchDialog(QDialog):
         self.setFont(font)
 
     def match(self):
-        self.names = list(nodes_connect_dialog.get_matched_nodes(self.name_line_edit.text()))
+        self.results = list(nodes_connect_dialog.get_matched_nodes(self.name_line_edit.text()))
 
         # close dialog after Match
         self.close()
@@ -44,4 +44,4 @@ class ConnMatchDialog(QDialog):
 def exec_(parent=None):
     dia = ConnMatchDialog(parent)
     dia.exec_()
-    return dia.names
+    return dia.results

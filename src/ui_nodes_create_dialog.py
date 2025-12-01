@@ -11,7 +11,7 @@ import settings
 
 class ExpGenDialog(QDialog):
     def __init__(self, parent=None):
-        self.name_types = []
+        self.results = []
         super(ExpGenDialog, self).__init__(parent)
         self.setWindowTitle("Generate Expression")
         self.main_layout = QHBoxLayout(self)
@@ -47,7 +47,7 @@ class ExpGenDialog(QDialog):
         type_ = self.type_line_edit.text()
         values = [{"id": i} for i in range(num)]
 
-        self.name_types = [(n, type_) for n in nodes_create_dialog.parse(exp, values)]
+        self.results = [(n, type_) for n in nodes_create_dialog.parse(exp, values)]
 
         # close dialog after generation
         self.close()
@@ -56,4 +56,4 @@ class ExpGenDialog(QDialog):
 def exec_(parent=None):
     dia = ExpGenDialog(parent)
     dia.exec_()
-    return dia.name_types
+    return dia.results

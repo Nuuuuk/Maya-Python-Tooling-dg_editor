@@ -11,48 +11,30 @@ from PySide2.QtWidgets import *
 
 import maya.cmds as cmds
 
+from widgets import BaseWidget
 import nodes_create
 import ui_nodes_create_dialog
 import ui_nodes_delete_dialog
 
-class BaseWidget(QWidget):
-    def __init__(self, parent=None):
-        super(BaseWidget, self).__init__(parent)
-
-    # a faint background to distinguish two widgets
-    def paintEvent(self, event):
-        p = QPainter(self)
-        p.setPen(Qt.NoPen)
-        p.setBrush(QBrush(QColor(62,62,62)))
-        p.drawRect(self.rect())
-        p.end()
 
 # upper layout to create nodes
 class WidgetCreate(BaseWidget):
     def __init__(self, parent=None):
         super(WidgetCreate, self).__init__(parent)
 
-        # body_layout
-        self.name_text = QTextEdit()
-        self.create_exp_btn = QPushButton("Create by Exp")
-        self.create_exp_btn.setFixedWidth(170)
-
-        self.create_exp_btn.clicked.connect(self.create_dialog)
-
-        self.create_exp_btn_layout = QVBoxLayout()
-        self.create_exp_btn_layout.addWidget(self.create_exp_btn)
-        self.create_exp_btn_layout.addStretch()
-        self.body_layout = body_layout = QHBoxLayout()
-        body_layout.addWidget(self.name_text)
-        body_layout.addLayout(self.create_exp_btn_layout)
-
-        # main_layout
         self.create_btn = QPushButton("Create")
         self.create_btn.clicked.connect(self.create_node)
 
-        self.main_layout = main_layout = QVBoxLayout(self)
-        main_layout.addWidget(QLabel(text="Create: ", parent=None))
-        main_layout.addLayout(body_layout)
+        main_layout = self.main_layout
+        self.add_header("Create: ")
+
+        body_layout, self.name_text, self.create_exp_btn = (
+            self.add_text_btn_block(
+                btn_text="Create by Exp",
+                btn_connect=self.create_dialog
+            )
+        )
+
         main_layout.addWidget(self.create_btn)
 
     def create_node(self):
@@ -72,27 +54,19 @@ class WidgetDelete(BaseWidget):
     def __init__(self, parent=None):
         super(WidgetDelete, self).__init__(parent)
 
-        # body_layout
-        self.name_text = QTextEdit()
-        self.match_exp_btn = QPushButton("Match by Regex")
-        self.match_exp_btn.setFixedWidth(170)
-
-        self.match_exp_btn.clicked.connect(self.delete_dialog)
-
-        self.match_exp_btn_layout = QVBoxLayout()
-        self.match_exp_btn_layout.addWidget(self.match_exp_btn)
-        self.match_exp_btn_layout.addStretch()
-        self.body_layout = body_layout = QHBoxLayout()
-        body_layout.addWidget(self.name_text)
-        body_layout.addLayout(self.match_exp_btn_layout)
-
-        # main_layout
         self.delete_btn = QPushButton("Delete")
         self.delete_btn.clicked.connect(self.delete_node)
 
-        self.main_layout = main_layout = QVBoxLayout(self)
-        main_layout.addWidget(QLabel(text="Delete: ", parent=None))
-        main_layout.addLayout(body_layout)
+        main_layout = self.main_layout
+        self.add_header("Delete: ")
+
+        body_layout, self.name_text, self.match_exp_btn = (
+            self.add_text_btn_block(
+                btn_text="Match by Regex",
+                btn_connect=self.delete_dialog
+            )
+        )
+
         main_layout.addWidget(self.delete_btn)
 
     def delete_node(self):

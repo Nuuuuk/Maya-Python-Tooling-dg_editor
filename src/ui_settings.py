@@ -9,35 +9,25 @@ from PySide2.QtGui import *
 from PySide2.QtCore import Qt
 from PySide2.QtWidgets import *
 
+from widgets import BaseWidget
 import settings
 
-class FontSizeWidget(QWidget):
+class FontSizeWidget(BaseWidget):
     def __init__(self, parent=None):
         super(FontSizeWidget, self).__init__(parent)
-        self.main_layout = QHBoxLayout(self)
         self.font_size_input = QSpinBox()
         self.font_size_input.setRange(5, 15)
 
         self.font_size_input.setValue(self.get_font_size())
         self.font_size_input.valueChanged.connect(lambda *args: self.set_font_size())
 
-        self.main_layout.addWidget(QLabel("Font Size"))
-        self.main_layout.addWidget(self.font_size_input)
-        self.main_layout.addStretch()
+        self.add_input_row("Font Size", self.font_size_input, False)
 
     def get_font_size(self):
         return settings.get_font_size()
 
     def set_font_size(self):
         settings.set("font_size", self.font_size_input.value())
-
-    # a faint background to distinguish two widgets
-    def paintEvent(self, event):
-        p = QPainter(self)
-        p.setPen(Qt.NoPen)
-        p.setBrush(QBrush(QColor(62,62,62)))
-        p.drawRect(self.rect())
-        p.end()
 
 
 class SettingsWidget(QWidget):

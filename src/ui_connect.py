@@ -37,7 +37,7 @@ class MatchWidget(BaseWidget):
         )
 
     def match(self):
-        names = ui_connect_dialog.exec_(self)
+        names = ui_connect_dialog.show(self)
         if not names:
             cmds.warning("Operation cancelled")
             return

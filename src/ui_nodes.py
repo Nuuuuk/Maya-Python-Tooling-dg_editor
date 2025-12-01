@@ -43,7 +43,7 @@ class WidgetCreate(BaseWidget):
             cmds.createNode(type, name=name)
 
     def create_dialog(self):
-        names = ui_nodes_create_dialog.exec_(self)
+        names = ui_nodes_create_dialog.show(self)
         if not names:
             cmds.warning("Operation cancelled")
             return
@@ -75,7 +75,7 @@ class WidgetDelete(BaseWidget):
         cmds.delete(node_names)
 
     def delete_dialog(self):
-        names = ui_nodes_delete_dialog.exec_(self)
+        names = ui_nodes_delete_dialog.show(self)
         if not names:
             cmds.warning("Operation cancelled")
             return

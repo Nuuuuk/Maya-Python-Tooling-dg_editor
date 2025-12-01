@@ -1,0 +1,35 @@
+global proc install_dg_editor() {
+    // 1. get path
+    string $whatIs = `whatIs install_dg_editor`;
+    string $fullPath = `substring $whatIs 25 999`;
+    string $buffer[];
+    int $numTok = `tokenize $fullPath "/" $buffer`;
+    string $scriptPath = "";
+
+    for ($i=0; $i<($numTok-1); $i++) {
+        $scriptPath += $buffer[$i] + "/";
+    }
+
+    // 2. build Python launch command
+    string $command = "import sys;import os;path = r'" + $scriptPath + "src';sys.path.insert(0, path) if path not in sys.path else None;import dg_editor;dg_editor.show()";
+
+    // 3. get icon
+    string $icon = $scriptPath + "log.ico";
+
+    // 4. add Shelf button
+    global string $gShelfTopLevel;
+    string $currentShelf = `tabLayout -q -selectTab $gShelfTopLevel`;
+    setParent $currentShelf;
+
+    shelfButton
+        -command $command
+        -annotation "DG Editor Tool"
+        -label "DG Editor"
+        -image $icon
+        -image1 $icon
+        -sourceType "python";
+
+    print("DG Editor installed successfully on shelf: " + $currentShelf + "\n");
+}
+
+install_dg_editor();

@@ -38,7 +38,7 @@ class MatchWidget(BaseWidget):
 
     def match(self):
         names = ui_connect_dialog.exec_(self)
-        if names is None:
+        if not names:
             cmds.warning("Operation cancelled")
             return
         self.text_box.setPlainText("\n".join(names))

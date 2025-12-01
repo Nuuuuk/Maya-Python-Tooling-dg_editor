@@ -3,9 +3,9 @@ from __future__ import unicode_literals, print_function
 
 import json, os
 import codecs
+import config
 
-PATH = os.path.dirname(os.path.abspath(__file__))
-JSON_PATH = os.path.join(PATH, "settings.json")
+JSON_PATH = os.path.join(config.PATH, "settings.json")
 
 def _get_json():
     if not os.path.isfile(JSON_PATH):
@@ -25,6 +25,11 @@ def set(key, val):
     _save_json(data)
 
 
-def get(key, default=7):
+def get(key, default):
     data = _get_json()
     return data.get(key, default)
+
+
+# default settings
+def get_font_size():
+    return get('font_size', 10)

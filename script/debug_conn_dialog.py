@@ -1,3 +1,6 @@
+# for py2
+from __future__ import unicode_literals, print_function
+
 import importlib as imp
 import init
 import ui_connect_dialog
@@ -5,4 +8,4 @@ import ui_connect_dialog
 # reload
 imp.reload(init)
 
-win = ui_connect_dialog.exec_()
+print(ui_connect_dialog.exec_())

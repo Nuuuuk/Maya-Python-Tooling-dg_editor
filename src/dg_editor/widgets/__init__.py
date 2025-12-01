@@ -1,11 +1,10 @@
 # for py2
 from __future__ import unicode_literals, print_function
 
-import sys
 import importlib as imp
 
 # import modules needed
-import config
+from .. import config
 
 from . import base
 

@@ -7,8 +7,8 @@ from __future__ import unicode_literals, print_function
 
 from PySide2.QtWidgets import *
 
-import connect_dialog
-from widgets import BaseDialog
+from . import connect_dialog
+from .widgets import BaseDialog
 
 class ConnMatchDialog(BaseDialog):
     def __init__(self, parent=None):
@@ -33,7 +33,3 @@ class ConnMatchDialog(BaseDialog):
 
 def show(parent=None):
     return ConnMatchDialog.show_ui(parent)
-# def exec_(parent=None):
-#     dia = ConnMatchDialog(parent)
-#     dia.exec_()
-#     return dia.results

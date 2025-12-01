@@ -1,6 +1,7 @@
 import maya.cmds as cmds
 import functools
-import settings
+
+from . import settings
 
 
 def undo_block(fn):

@@ -2,10 +2,9 @@
 from __future__ import unicode_literals, print_function
 
 import importlib as imp
-import init
-import ui_connect_dialog
+from dg_editor import ui_connect_dialog, reloader
 
 # reload
-imp.reload(init)
+imp.reload(reloader)
 
-print(ui_connect_dialog.exec_())
+print(ui_connect_dialog.show())

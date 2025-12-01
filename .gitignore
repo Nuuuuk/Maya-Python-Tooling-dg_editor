@@ -12,4 +12,4 @@ __pycache__/
 .mayaSwatches/
 
 # 5. ignore generated settins.json
-/src/settings.json
+/src/dg_editor/settings.json

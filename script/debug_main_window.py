@@ -1,8 +1,7 @@
 import importlib as imp
-import init
-import ui__main_window
+from dg_editor import ui__main_window, reloader
 
 # reload
-imp.reload(init)
+imp.reload(reloader)
 
 win = ui__main_window.new()

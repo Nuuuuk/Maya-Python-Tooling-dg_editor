@@ -110,6 +110,8 @@ class WidgetConnections(BaseWidget):
                             "{}.worldMatrix[0]".format(src_node),
                             "{}.offsetParentMatrix".format(dst_node)
                         )
+                        cmds.setAttr("{}.offsetParentMatrix".format(dst_node),
+                                     [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1], type="matrix")
                     except:
                         cmds.warning("Disconnection failed between {} and {}".format(o, i))
 

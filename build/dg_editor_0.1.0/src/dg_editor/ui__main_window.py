@@ -37,7 +37,7 @@ class DGEditorWindow(QWidget):
         self.setWindowFlags(Qt.Window)
 
         # add title
-        self.setWindowTitle("dg editor {}".format(config.VERSION))
+        self.setWindowTitle("Dependency Graph Editor {}".format(config.VERSION))
 
         # create an empty vertical layout
         self.main_layout = layout = QVBoxLayout(self)

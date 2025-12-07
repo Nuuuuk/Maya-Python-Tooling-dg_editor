@@ -10,10 +10,11 @@ from .utils import undo_block
 from . import settings
 
 class WidgetFuncSelect(BaseWidget):
-    Connect, Disconnect, MatrixConnect = range(3)
+    Connect, Disconnect, MatrixConnect, Snap = range(4)
     ConnectText = "Connect"
     DisconnectText = "Disconnect"
     MatrixConnectText = "Matrix Connect"
+    SnapText = "Snap"
 
     def __init__(self, parent=None):
         super(WidgetFuncSelect, self).__init__(parent)
@@ -22,6 +23,7 @@ class WidgetFuncSelect(BaseWidget):
         self.func_combo.addItem(self.ConnectText)
         self.func_combo.addItem(self.MatrixConnectText)
         self.func_combo.addItem(self.DisconnectText)
+        self.func_combo.addItem(self.SnapText)
 
         settings.bind_combobox(self.func_combo, 'conn_operation', 'Connect')
 
@@ -33,6 +35,8 @@ class WidgetFuncSelect(BaseWidget):
             return self.Connect
         elif text == self.MatrixConnectText:
             return self.MatrixConnect
+        elif text == self.SnapText:
+            return self.Snap
         else:
             return self.Disconnect
 
@@ -100,6 +104,8 @@ class WidgetConnections(BaseWidget):
                     "{}.offsetParentMatrix".format(dst_node),
                     force=True
                 )
+            elif func_type == WidgetFuncSelect.Snap:
+                cmds.matchTransform(dst_node, src_node, pos=True, rot=True)
             elif func_type == WidgetFuncSelect.Disconnect:
                 try:
                     cmds.disconnectAttr(o, i)

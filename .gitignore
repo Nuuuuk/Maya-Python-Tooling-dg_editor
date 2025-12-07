@@ -11,5 +11,5 @@ __pycache__/
 # 4. ignore Maya thumbnails
 .mayaSwatches/
 
-# 5. ignore generated settins.json
-/src/dg_editor/settings.json
+# 5. ignore generated .json
+*.json

@@ -1,1 +1,0 @@
-{"Node Create Name": "prefix_{id}_suffix", "settings_undo_check": true, "settings_font_size": 10, "node_delete_regex": "pSphere.*", "conn_regex": "pSphere.*\\.translateX", "conn_operation": "Connect"}

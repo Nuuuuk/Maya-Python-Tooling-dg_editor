@@ -2,6 +2,8 @@
 
 Production tool for batch node operations in Maya. Handles expression-based creation, regex pattern matching, and procedural workflows for riggers and pipeline TDs.
 
+More info visit: [My Website](https://leiwu.co/maya-dependency-graph-editor/)
+
 ![Version](https://img.shields.io/badge/version-0.1.1-blue)
 ![Maya](https://img.shields.io/badge/Maya-2020%2B-green)
 ![Python](https://img.shields.io/badge/Python-3.7%2B-yellow)
@@ -31,50 +33,6 @@ Production tool for batch node operations in Maya. Handles expression-based crea
 - **Atomic undo**: All batch operations collapse to single undo step
 - **Persistent settings**: JSON-backed auto-save for patterns and preferences
 - **Hot-reload**: Module reload system for rapid development iteration
-
----
-
-## Installation
-
-1. **Download** the latest release
-2. **Extract** to any location
-3. **Drag** `install.mel` into Maya viewport
-
-The installer injects the tool path into `sys.path` and creates a persistent shelf button.
-
----
-
-## Quick Start
-
-### Create 20 FK Joints
-```
-Expression: spine_FK_{id}_jnt: joint
-Count: 20
-Outliner Result: spine_FK_0_jnt through spine_FK_19_jnt
-```
-
-### Connect IK Controls to FK Joints (Matrix)
-```
-From: spine_IK_(\d+)_ctrl
-To: spine_FK_\1_jnt
-Operation: Matrix Connect
-Result: 20 worldMatrix connections
-```
-
-### Batch Rename for Unreal Engine
-```
-Search: collision_hull_(\d+)
-Replace: UCX_character_hull_\1
-Result: collision_hull_05 → UCX_character_hull_05
-```
-
----
-
-## Requirements
-
-- **Maya**: 2020+
-- **Python**: 3.7+
-- **Dependencies**: PySide2
 
 ---
 
@@ -121,9 +79,47 @@ install.mel                         # MEL installer: drag-drop shelf button crea
 
 ---
 
-## Documentation
+## Installation
 
-Full technical documentation with code examples: [My Website](https://leiwu.co/maya-dependency-graph-editor/)
+1. **Download** the latest release
+2. **Extract** to any location
+3. **Drag** `install.mel` into Maya viewport
+
+The installer injects the tool path into `sys.path` and creates a persistent shelf button.
+
+---
+
+## Quick Start
+
+### Create 20 FK Joints
+```
+Expression: spine_FK_{id}_jnt: joint
+Count: 20
+Outliner Result: spine_FK_0_jnt through spine_FK_19_jnt
+```
+
+### Connect IK Controls to FK Joints (Matrix)
+```
+From: spine_IK_(\d+)_ctrl
+To: spine_FK_\1_jnt
+Operation: Matrix Connect
+Result: 20 worldMatrix connections
+```
+
+### Batch Rename for Unreal Engine
+```
+Search: collision_hull_(\d+)
+Replace: UCX_character_hull_\1
+Result: collision_hull_05 → UCX_character_hull_05
+```
+
+---
+
+## Requirements
+
+- **Maya**: 2020+
+- **Python**: 3.7+
+- **Dependencies**: PySide2
 
 ---
 

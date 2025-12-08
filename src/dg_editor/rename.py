@@ -23,6 +23,11 @@ def add_name_prefix(prefix):
         node = cmds.ls(uid)[0]
         cmds.rename(node, prefix + node.split('|')[-1])
 
+def add_name_suffix(suffix):
+    for uid in _select_uids():
+        node = cmds.ls(uid)[0]
+        cmds.rename(node, node.split('|')[-1] + suffix)
+
 def search_n_replace(search, replace):
     for uid in _select_uids():
         node = cmds.ls(uid)[0]

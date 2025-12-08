@@ -16,8 +16,8 @@ class WidgetPrefix(BaseWidget):
     def __init__(self, parent=None):
         super(WidgetPrefix, self).__init__(parent)
 
-        self.add_header("Add Prefix")
-        body_layout, self.text_input = self.add_input_row("Prefix:")
+        self.add_header("Add Affix")
+        body_layout, self.pre_input = self.add_input_row("Prefix:")
 
         # button at the end
         self.add_btn = QPushButton("Add")
@@ -25,9 +25,20 @@ class WidgetPrefix(BaseWidget):
 
         body_layout.addWidget(self.add_btn)
 
+        body_layout, self.suf_input = self.add_input_row("Suffix:")
+
+        # button at the end
+        self.add_btn_1 = QPushButton("Add")
+        self.add_btn_1.clicked.connect(self.add_name_suffix)
+
+        body_layout.addWidget(self.add_btn_1)
+
     @undo_block
     def add_name_prefix(self):
-        rename.add_name_prefix(self.text_input.text())
+        rename.add_name_prefix(self.pre_input.text())
+    @undo_block
+    def add_name_suffix(self):
+        rename.add_name_suffix(self.suf_input.text())
 
 class WidgetReplace(BaseWidget):
     def __init__(self, parent=None):

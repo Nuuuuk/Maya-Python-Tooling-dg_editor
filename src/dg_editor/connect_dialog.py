@@ -25,10 +25,11 @@ def get_matched_nodes(pattern):
     # Check if pattern is for node.attr or just nodes
     match_attrs = '.' in pattern
 
-    if match_attrs:
-        # Get all nodes, then filter
-        all_nodes = cmds.ls('*')
-        for node in all_nodes:
+    # Get all nodes, then filter
+    all_nodes = cmds.ls('*')
+    for node in all_nodes:
+        if match_attrs:
+            # match node.attr
             attrs = cmds.listAttr(node) or []
             for attr in attrs:
                 full_attr = "{}.{}".format(node, attr)
@@ -36,10 +37,8 @@ def get_matched_nodes(pattern):
                 if not m is None:
                     if m.group(0) == full_attr:
                         yield full_attr
-    else:
-        # match node names only (more efficient)
-        all_nodes = cmds.ls('*')
-        for node in all_nodes:
+        else:
+            # match node names only
             m = regex_obj.match(node)
             if m is not None and m.group(0) == node:
                 yield node

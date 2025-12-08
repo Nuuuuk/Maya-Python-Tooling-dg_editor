@@ -11,7 +11,7 @@ import maya.cmds as cmds
 
 def get_matched_nodes(pattern):
     """
-    Yields nodes that strictly match the pattern.
+    Yields nodes or node.attr that match the pattern.
     """
     if not pattern:
         return
@@ -22,13 +22,24 @@ def get_matched_nodes(pattern):
         print("Invalid Regex Pattern")
         return
 
-    # Get all nodes, then filter
-    all_nodes = cmds.ls('*')
-    for node in all_nodes:
-        attrs = cmds.listAttr(node) or []
-        for attr in attrs:
-            attr = "{}.{}".format(node, attr)
-            m = regex_obj.match(attr)
-            if not m is None:
-                if m.group(0) == attr:
-                    yield attr
+    # Check if pattern is for node.attr or just nodes
+    match_attrs = '.' in pattern
+
+    if match_attrs:
+        # Get all nodes, then filter
+        all_nodes = cmds.ls('*')
+        for node in all_nodes:
+            attrs = cmds.listAttr(node) or []
+            for attr in attrs:
+                full_attr = "{}.{}".format(node, attr)
+                m = regex_obj.match(attr)
+                if not m is None:
+                    if m.group(0) == full_attr:
+                        yield full_attr
+    else:
+        # match node names only (more efficient)
+        all_nodes = cmds.ls('*')
+        for node in all_nodes:
+            m = regex_obj.match(node)
+            if m is not None and m.group(0) == node:
+                yield node

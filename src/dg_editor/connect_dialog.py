@@ -33,7 +33,7 @@ def get_matched_nodes(pattern):
             attrs = cmds.listAttr(node) or []
             for attr in attrs:
                 full_attr = "{}.{}".format(node, attr)
-                m = regex_obj.match(attr)
+                m = regex_obj.match(full_attr)
                 if not m is None:
                     if m.group(0) == full_attr:
                         yield full_attr

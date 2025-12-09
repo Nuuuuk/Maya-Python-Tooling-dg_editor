@@ -52,7 +52,7 @@ class MatchWidget(BaseWidget):
     def match(self):
         names = ui_connect_dialog.show(self)
         if not names:
-            cmds.warning("Operation cancelled")
+            cmds.warning("Operation cancelled or match failed")
             return
         self.text_box.setPlainText("\n".join(names))
 
